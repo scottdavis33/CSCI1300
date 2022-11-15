@@ -1,7 +1,7 @@
 // CSCI 1300 Fall 2022
 // Author: Jared Preyer && Scott Davis 
 // Recitation: 105 - Reagan Rychecky && 308 - Baljot Kaur
-// Project 3 - Class 3
+// Project 3 - Class Group
 #include <iostream>
 #include "Group.h"
 #include "Player.h"
