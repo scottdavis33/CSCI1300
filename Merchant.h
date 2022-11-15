@@ -1,7 +1,7 @@
 // CSCI 1300 Fall 2022
-// Author: Scott Davis
-// Recitation: 308 – Baljot Kaur
-// Project 3 - Class 2
+// Author: Jared Preyer && Scott Davis 
+// Recitation: 105 - Reagan Rychecky && 308 - Baljot Kaur
+// Project 3 - Class Merchant
 #include <iostream>
 #ifndef Merchant_H
 #define Merchant_H
