@@ -1,7 +1,7 @@
 // CSCI 1300 Fall 2022
-// Author: Scott Davis
-// Recitation: 308 – Baljot Kaur
-// Project 3 - Class 2
+// Author: Jared Preyer
+// Recitation: 105 - Reagan Rychecky
+// Project 3 - Class 1
 #include <iostream>
 #include <cstdlib>
 #include "Merchant.h"
@@ -67,7 +67,7 @@ Pseudocode Merchant setArmor
 5. Subtract each armor that they get from their total amount of gold
 6. After all reprompt user to the Inventory Menu that shows them how many goods they have
 */
-void Merchant::setArmor(bool armor)
+void Merchant::setArmor()
 {
    
 }
@@ -103,141 +103,199 @@ Pseudocode Merchant getCookware
 6. After payments have been confirmed. Reprompt menu with updated purchases
 
 */
-void Merchant::setCookware(int ceramic_pot, int frying_pan, int cauldron)
+void Merchant::getCookware(int ceramic_pot, int frying_pan, int cauldron)
 {
-    // int choice = 0;
-    // int choice1 = 0;
-    // string choice2;
+    int choice = 0;
+    int choice1 = 0;
+    char choice2;
+    int howmany = 0;
 
-  
-    //        do
-    //         {
-    //             cout << "I have a several types of cookware, which one would you like? " << endl
-    //                 <<  "Each type has a different probability of breaking when used, marked with (XX%)." << endl;
+    do
+    {
+        displayMenu();
+        
+        cout << "I have a several types of cookware, which one would you like? " << endl
+             <<  "Each type has a different probability of breaking when used, marked with (XX%)." << endl;
                 
-    //             cout << "Choose one of the following: " << endl
-    //                  << " 1. (25%) Ceramic Pot [2 Gold] " << endl
-    //                  << " 2. (10%) Frying Pan [10 Gold] " << endl
-    //                  << " 3. ( 2%) Cauldron [20 Gold] " << endl
-    //                  << " 4. Cancel " << endl;
-    //                  cin >> choice1;
-    //             if(choice1 == 1)
-    //             {   
-    //                 cout << "How many would you like? (Enter a positive integer, or 0 to cancel)" << endl;
-    //                 cin >> gold_;
+        cout << "Choose one of the following: " << endl
+         << " 1. (25%) Ceramic Pot [2 Gold] " << endl
+         << " 2. (10%) Frying Pan [10 Gold] " << endl
+         << " 3. ( 2%) Cauldron [20 Gold] " << endl
+         << " 4. Cancel " << endl;
+        `cin >> choice1;
+        switch(choice1)
+        {
+            case 1: 
+            {
+                cout << "How many would you like? (Enter a positive integer, or 0 to cancel)" << endl;
+                cin >> howmany;
 
-    //                 if(gold_ <= 0)
-    //                 {
-    //                     cout << "Goodbye." << endl;
-    //                 }
-    //                     else if(gold_ <= 1)
-    //                     {
-    //                         cout << "You want to buy " gold_  " Cermaic Pot for 2 Gold? (y/n)" << endl;
-    //                         cin >> choice2;
+                if(howmany <= 0)
+                {
+                    cout << "Goodbye" << endl;
+                    return;
+                }
+                else
+                {
+                    cout << "You want to buy " howmany  " Cermaic Pot for 2 Gold? (y/n)" << endl;
+                    cin >> choice2;
 
-    //                         if(choice2 == 'y')
-    //                         {
-    //                             if(gold_ > 0)
-    //                             {
-    //                                 gold_ = gold_ - 2; 
-    //                             }
+                    if(choice2 == 'y')
+                    {
+                        gold_ = gold_ - 2;
+                        if(random1 == 0)
+                        {
+                            ceramic_pot_ = "Pot Broken:";
+                            ceramic_pot_ --; // decrement items that is broken
+                        }
+                        else if(random1 == 1)
+                        {
+                            ceramic_pot_ = "Cermic Pot is good:";
+                            ingredients_ = ingredients_ + ceramic_pot_; // Comment need to add ingredients into the pot
+
+                        }
+                        else if(random1 == 2)
+                        {
+                            ceramic_pot_ = "Cermic Pot is gucci:";
+                            ceramic_pot_ = ceramic_pot_ + ingredients_;
+                            // comment need to add ingredients into the pot
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                   
+                }
+            }
+            case 2:
+            {
+                
+                cout << "How many would you like? (Enter a positive integer, or 0 to cancel)" << endl;
+                cin >> howmany;
+
+                if(howmany <= 0)
+                {
+                    cout << "Goodbye" << endl;
+                    return;
+                }
+                else
+                {
+                    cout << "You want to buy " howmany  " Frying Pan for 10 Gold? (y/n)" << endl;
+                    cin >> choice2;
+
+                    if(choice == 'y')
+                    {
+                        if(gold_ > 0)
+                        {
+                            gold_ = gold_ - 10;
+                        }
+                        else
+                        {
                             
-    //                             int random1 = rand() % 3;
-    //                             if(random1 == 0)
-    //                             {
-    //                                 ceramic_pot_ = "Pot Broken:";
-    //                                 ceramic_pot_ --; // decrement items that is broken
-    //                             }
-    //                             else if(random1 == 1)
-    //                             {
-    //                                 ceramic_pot_ = "Cermic Pot is good:";
-    //                                 ingredients_ = ingredients_ + ceramic_pot_; // Comment need to add ingredients into the pot
-
-    //                             }
-    //                             else if(random1 == 2)
-    //                             {
-    //                                 ceramic_pot_ = "Cermic Pot is gucci:";
-    //                                 ceramic_pot_ = ceramic_pot_ + ingredients_;
-    //                                 // comment need to add ingredients into the pot
-    //                             }
-    //                         }
-    //                         else
-    //                         {
-    //                             break;
-    //                         }
-    //                     }
-
-    //             else if(choice1 == 2)
-    //             {
+                        }
+                            int random2 = rand() % 9;
+                            if(random2 == 0)
+                            {
+                                frying_pan_ = "Pot Broken";
+                                frying_pan_ --;
+                            }
+                            // Ask about the other 9 conditions 
+                            cout << "Thank you for your patronage! What else can I get for you?" << endl;
+                            return;
                         
-    //                 cout << "How many would you like? (Enter a positive integer, or 0 to cancel)" << endl;
-    //                 cin >> gold_;
+                    }
+                    else 
+                    {
 
-    //                 if(gold_ <= 0)
-    //                 {
-    //                 cout << "Goodbye." << endl;
-    //                 break; // Just an idea
-    //                 }
-    //                 else if(gold_ > 1)
-    //                 {
-    //                     cout << "You want to buy " gold_  " Frying Pan for 10 Gold? (y/n)" << endl;
-    //                     cin >> choice2;
+                        break;
+                    }
+                } 
 
-    //                     if(choice == 'y')
-    //                     {
-    //                     if(gold_ > 0)
-    //                     {
-    //                         gold_ = gold_ - 10;
-    //                     }
-    //                         int random2 = rand() % 9;
-    //                         if(random2 == 0)
-    //                         {
-    //                             frying_pan_ = "Pot Broken";
-    //                             frying_pan_ --;
-    //                         }
-    //                         // Ask about the other 9 conditions 
-    //                         cout << "Thank you for your patronage! What else can I get for you?" << endl;
-    //                     }
-    //                     else 
-    //                     {
+            }
+            case 3:
+            {
 
-    //                         break;
-    //                     }
-    //                 }    
-
-    //             }
-    //             else if(choice1 == 3)
-    //             {
-    //                 cout << "How many would you like? (Enter a positive integer, or 0 to cancel)" << endl;
-    //                 cin >> gold_;
-
-    //                 if(gold_ <= 0)
-    //                 {
-    //                     cout << "Goodbye." << endl;
+            }
+            default:
+            cout << endl;
+            cout << "Invalid input. Please select a valid input. " << endl;
+        
+    } while (choice1 != 4);
+    
+  
+           
+                else if(choice1 == 2)
+                {
                         
-    //                 }
-    //                 else if(gold_ > 1)
-    //                 {
-    //                     cout << "You want to buy " gold_ << " Cauldron(s) for 20 Gold? (y/n)" << endl;
-    //                     cin >> choice2;
+                    cout << "How many would you like? (Enter a positive integer, or 0 to cancel)" << endl;
+                    cin >> gold_;
 
-    //                     if(choice2 == 'y')
-    //                     {
+                    if(gold_ <= 0)
+                    {
+                    cout << "Goodbye." << endl;
+                    break; // Just an idea
+                    }
+                    else if(gold_ > 1)
+                    {
+                        cout << "You want to buy " gold_  " Frying Pan for 10 Gold? (y/n)" << endl;
+                        cin >> choice2;
+
+                        if(choice == 'y')
+                        {
+                        if(gold_ > 0)
+                        {
+                            gold_ = gold_ - 10;
+                        }
+                            int random2 = rand() % 9;
+                            if(random2 == 0)
+                            {
+                                frying_pan_ = "Pot Broken";
+                                frying_pan_ --;
+                            }
+                            // Ask about the other 9 conditions 
+                            cout << "Thank you for your patronage! What else can I get for you?" << endl;
+                        }
+                        else 
+                        {
+
+                            break;
+                        }
+                    }    
+
+                }
+                else if(choice1 == 3)
+                {
+                    cout << "How many would you like? (Enter a positive integer, or 0 to cancel)" << endl;
+                    cin >> gold_;
+
+                    if(gold_ <= 0)
+                    {
+                        cout << "Goodbye." << endl;
+                        
+                    }
+                    else if(gold_ > 1)
+                    {
+                        cout << "You want to buy " gold_ << " Cauldron(s) for 20 Gold? (y/n)" << endl;
+                        cin >> choice2;
+
+                        if(choice2 == 'y')
+                        {
                             
-    //                     }
-    //                 }
-    //             }
-    //             else if()
-    //             {
+                        }
+                    }
+                }
+                else if()
+                {
 
-    //             }
-    //             else
-    //             {
-    //                 cout << "Goodbye" << endl;
-    //             }
-    //             } while (choice1 != 4);
+                }
+                else
+                {
+                    cout << "Goodbye" << endl;
+                }
+                } while (choice1 != 4);
 
-    //         }
+            }
 
 }
 /*
@@ -252,46 +310,46 @@ Pseudocode Merchant setWeapons
 */
 void Merchant::setWeapons(int club, int spear, int rapier, int axe, int sword)
 {
-    gold_ = gold_ - 2;
-    club_ = 2 * gold_;
-    spear_ = 2 * gold_;
-    rapier_ = 5 * gold_;
-    axe_ = 15 * gold_;
-    sword_ = 50 * gold_;
-    weapons_ = club_ + spear_ + rapier_ + axe_ + sword_;
+    // gold_ = gold_ - 2;
+    // club_ = 2 * gold_;
+    // spear_ = 2 * gold_;
+    // rapier_ = 5 * gold_;
+    // axe_ = 15 * gold_;
+    // sword_ = 50 * gold_;
+    // weapons_ = club_ + spear_ + rapier_ + axe_ + sword_;
 
-    int choice = 0;
-    int choice1 = 0;
-    string choice2;
-    do
-    {   
+    // int choice = 0;
+    // int choice1 = 0;
+    // string choice2;
+    // do
+    // {   
         
 
-        if(choice == 1)
-        {   
+    //     if(choice == 1)
+    //     {   
             
-        }
-        else if(choice == 2)
-        {
+    //     }
+    //     else if(choice == 2)
+    //     {
 
-        }
-        else if(choice == 3)
-        {
+    //     }
+    //     else if(choice == 3)
+    //     {
 
-        }
-        else if(choice == 4)
-        {
+    //     }
+    //     else if(choice == 4)
+    //     {
 
-        }
-        else if(choice == 5)
-        {
+    //     }
+    //     else if(choice == 5)
+    //     {
 
-        }
-        else if(choice == 6)
-        {
+    //     }
+    //     else if(choice == 6)
+    //     {
 
-        }
-    } while (choice != 6);
+    //     }
+    // } while (choice != 6);
     
 }
 /*
@@ -302,6 +360,17 @@ Pseudocode Merchant displayMenu
 */
 void::Merchant::displayMenu()
 {
+    cout << "Between the 5 of you, you have 100 gold pieces." << endl
+    << "You will need to spend the some of your money on the following items: " << endl
+    << endl
+    << "- INGREDIENTS. To make food, you have to cook raw ingredients." << endl
+    << "- COOKWARE. If you want to cook, you have to have cookware first." << endl
+    << "- WEAPONS. You'll want at least one weapon per party member to find off monsters." << endl
+    << "- ARMOR. Armor increases the chances of surviving a monster attack." << endl
+    << "You can spend all of your money here before you start your journey, or you can save some to spend on merchants along the way. But beware, some of the merchants in this dungeon are shady characters, and they won't always give you a fair price..." << endl;
+    
+    
+    
     cout << "+-------------+" << endl
     << "| INVENTORY   |" << endl
     << "+-------------+" << endl
