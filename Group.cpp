@@ -1,13 +1,41 @@
 // CSCI 1300 Fall 2022
-// Author: Scott Davis && Jared Preyer
-// Recitation: 308 – Baljot Kaur && 105 - Raegan Rychecky
-// Project 3 - Class 1
-
+// Author: Jared Preyer && Scott Davis 
+// Recitation: 105 - Reagan Rychecky && 308 - Baljot Kaur
+// Project 3 - Class 3
 #include <iostream>
 #include "Group.h"
 #include "Player.h"
 #include "Map.h"
+#include <ctime>
+#include <fstream>
+#include <cstdlib>
+
 using namespace std;
+
+void Group::setFullandName()
+{
+    string name,name1,name2,name3,name4;
+    cout << "Please enter a name for your players" << endl;
+    cin >> name;
+    players[0].setName(name);
+    players[0].setFullness(50);
+    players[0].setLife(true);
+    
+    cout << "Enter a name for each member of your team" << endl;
+    cin >> name1 >> name2 >> name3 >> name4;
+    players[1].setName(name1);
+    players[1].setFullness(50);
+    players[1].setLife(true);
+    players[2].setName(name2);
+    players[2].setFullness(50);
+    players[2].setLife(true);
+    players[3].setName(name3);
+    players[3].setFullness(50);
+    players[3].setLife(true);
+    players[4].setName(name4);
+    players[4].setFullness(50);
+    players[4].setLife(true);
+}
 /*
 Pseudocode for groupmove
 1. Pulling for Players class
@@ -31,10 +59,29 @@ string Group::getName(int index)
     return players[index].getName();
 }
 
-// int Group::getFull(int index)
-// {
-//     return players[index].getFull();
-// }
+int Group::getFull(int index)
+{
+    return players[index].getfull();
+}
 /*
-Pseudocode set Full
+Pseudocode for status map
+1. This will be displayed every single time they leave a room 
 */
+void Group::life(Map map)
+{
+    cout << "+-------------+" << endl;
+    cout << "|   STATUS    |" << endl;
+    cout << "+-------------+" << endl;
+    cout << "+-------------+" << endl;
+    cout << "| Rooms Cleared: " << map.getRoomCount() << "| Keys: 0|" << "Anger Level: 0" << endl;
+    cout << "+-------------+" << endl;    
+    cout << "+-------------+" << endl;
+    cout << "|    PARTY    |" << endl;
+    cout << "+-------------+" << endl;
+    cout << "| " << players[0].getName() << " | " << "Fullness: " << players[0].getFull() << endl;
+    cout << "| " << players[1].getName() << " | " << "Fullness: " << players[1].getFull() << endl;
+    cout << "| " << players[2].getName() << " | " << "Fullness: " << players[2].getFull() << endl;
+    cout << "| " << players[3].getName() << " | " << "Fullness: " << players[3].getFull() << endl;
+    cout << "| " << players[4].getName() << " | " << "Fullness: " << players[4].getFull() << endl;
+    cout << "+-------------+" << endl;
+}
