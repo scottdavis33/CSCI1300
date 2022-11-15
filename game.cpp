@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include "Game.h"
+#include "Map.h"
 
 using namespace std;
 
@@ -68,7 +69,7 @@ Game::Game()
 }
 }
 
-void Game::getMonsters()
+void Game::printMonsters()
 {
     for(int i = 0; i < 21; i++)
     {
@@ -85,6 +86,30 @@ void Game::setSorcerer_anger(int anger)
 int Game::getSorcerer_anger()
 {
     return sorcerer_anger_;
+}
+
+
+// void Game::setMap(Map map)
+// {
+//     cout << "Jared is daddy" << endl;
+//     map_ = map;
+
+// }
+
+void Game::generateMap()
+{
+    
+    for(int i = 0; i < 5; i++)
+    {
+        map_.addNPC(rand()%12, rand()%12);
+        map_.addRoom(rand()%12, rand()%12);
+    }
+
+}
+
+Map Game::getMap()
+{
+    return map_;
 }
 
 
