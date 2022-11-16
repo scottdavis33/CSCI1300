@@ -82,11 +82,32 @@ Game::Game()
         NPCCount_++;
     }
 }
+
+{
+    ifstream fin;
+    fin.open("./riddles.txt");
+    string line;
+    string answer;
+    
+    
+    if (fin.is_open())
+    {
+        while (!fin.eof())
+        {
+            string temp_array[2];
+            getline(fin, line);
+            split(line, '~', temp_array, 2);
+            riddles_.push_back(temp_array[0]);
+            answers_.push_back(temp_array[1]);
+        }
+    }    
+}
 }
 int Game::NPCCount()
 {
     return NPCCount_;
 }
+
 void Game::printMonsters()
 {
     for(int i = 0; i < 21; i++)
@@ -112,13 +133,74 @@ Map Game::getMap()
     return map_;
 }
 
+void Game::printRandomRiddle()
+{
+    int x = rand()%20;
 
-void Game::move(char c, Map m)
+    cout << riddles_.at(x) << endl;
+
+    answer_ = answers_.at(x);
+
+}
+
+void Game::NPCEncounter(Map &map)
+{
+    int choice;
+
+    cout << "You have encountered a dungeon dweller! What would you like to do?" << endl;
+
+    cout << "1. Move" << endl;
+    cout << "2. Speak to them" << endl;
+    cout << "3. Give up" << endl;
+    cin >> choice;
+
+    if(choice == 1)
+    {
+        char choice1;
+        cout << "What direction would you like to move in? (wasd)" << endl;
+        cin >> choice1;
+
+        move(choice1, map);
+    }
+    else if(choice == 2)
+    {
+        string answer;
+        cout << "You must solve a riddle, if it is my wares you seek" << endl;
+
+        cout << endl;
+
+        printRandomRiddle();
+
+        cout << endl;
+
+        cout << "Please enter your answer: " << endl;
+        cin >> answer;
+
+        if(answer == answer_)
+        {
+            cout << "You got the right answer!" << endl;
+        }
+
+
+
+    }
+
+
+}
+
+
+void Game::move(char c, Map &m)
 {
     if(c == 'w' || c == 'a' || c == 's' || c == 'd')
     {
         group_.groupmove();
         m.move(c);
+
+        if(m.isNPCLocation(m.getPlayerRow(), m.getPlayerCol()) == true)
+        {
+            NPCEncounter(m);
+        }
+        m.displayMap();
     } 
     else
     {
@@ -135,6 +217,7 @@ void Game::investigate()
     if(rand()%5 == 2)
     {
         cout << "You found hidden treasure!" << endl;
+
     }
     if(rand()%5 == 2)
     {
@@ -155,10 +238,10 @@ void Game::monsterFight()
 
 }
 
-void Game::printActionMenu()
+void Game::printActionMenu(Map &map)
 {
     int choice;
-    // do{
+    do{
     cout << "Please select an action: " << endl;
     cout << endl;
     cout << "1. Move" << endl;
@@ -178,7 +261,10 @@ void Game::printActionMenu()
         char choice1;
         cout << "What direction would you like to move in? (wasd)" << endl;
         cin >> choice1;
-        move(choice1, getMap());
+
+        move(choice1, map);
+
+        
     }
     else if(choice == 2)
     {
@@ -229,7 +315,7 @@ void Game::printActionMenu()
                 cin >> Frying;
 
                 // Need to add the 5:1 Ratio check
-                
+
                 
             }
             case 3:
@@ -255,7 +341,7 @@ void Game::printActionMenu()
         cout << "You are a pussy" << endl;
     }
 
-    // }while(choice != 5);
+    }while(choice != 5);
 }
 
 
