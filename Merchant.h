@@ -21,17 +21,19 @@ class Merchant
         int getIngredients();
         int getWeapons();
         int getCookware();
-        bool getArmor();
+        int getArmor();
         int getTreasures();
-        
-
+        // int getCeramicPot();
+        // int getCeram
         void setName();
-        void setIngredients(int ingredients);
-        void setWeapons(int club, int spear, int rapier, int axe, int sword);
-        void setCookware(int ceramic_pot, int frying_pan, int cauldron);
-        void setArmor(bool Armor);
-        void setTreasures(int silver, int ruby, int emerald, int diamond, int Gem);
+        void setIngredients();
+        void setWeapons();
+        void setCookware();
+        void setArmor();
+        void setsTreasures();
+        // int setCeramicPot(int Ceramic_Pot);
         void displayMenu();
+
         
         
 
@@ -46,7 +48,7 @@ class Merchant
         int ceramic_pot_;
         int frying_pan_;
         int cauldron_;
-        bool armor_;
+        int armor_;
         int silver_;
         int ruby_;
         int emerald_;
