@@ -32,6 +32,12 @@ private:
 
     Merchant merchant_;
 
+    vector<string> riddles_;
+
+    vector<string> answers_;
+
+    string answer_;
+
 public:
 
     Game();
@@ -50,13 +56,17 @@ public:
 
     int NPCCount();
 
-    void move(char, Map);
+    void move(char, Map&);
 
-    void printActionMenu();
+    void printActionMenu(Map &map);
 
     void investigate();
 
     void monsterFight();
+
+    void NPCEncounter(Map&);
+
+    void printRandomRiddle();
 
 
 };
