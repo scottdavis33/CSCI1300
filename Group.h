@@ -20,7 +20,6 @@ class Group
     public:
         void groupmove();
         void life(Map);
-        void Investigate(Map);
          //getters
          string getName(int index);
          int getFull(int index);
