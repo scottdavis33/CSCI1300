@@ -208,7 +208,6 @@ Pseudocode Merchant getCookware
 4. Use the random number generator. (Each pot has a probability of breaking. If remainder == 0 they have broke their pot)
 5. If player tries to buy more then the actual gold they have prompt user with error message
 6. After payments have been confirmed. Reprompt menu with updated purchases
-
 */
 void Merchant::setCookware()
 {
@@ -397,7 +396,6 @@ Pseudocode Merchant setWeapons
 4. set up a do while which with conditions
 5. Subtract how many every gold then want from there purchase
 6. Reprompt them with the same options until gold is not suffient || they want to exit Menu
-
 */
 void Merchant::setWeapons()
 {
@@ -624,6 +622,8 @@ void Merchant::setWeapons()
     } while (choice != 6);
     
 }
+
+
 void Merchant::setsTreasures()
 {
     int select = 0;
