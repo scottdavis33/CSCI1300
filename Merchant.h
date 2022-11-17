@@ -13,6 +13,7 @@ Pseudocode Merchant Menu
 2. Each setter has its own parameters as shown in the right up
 3. This menu is only applicable if players want to take advantage before there journey
 */
+
 class Merchant
 {
     public:
@@ -33,7 +34,9 @@ class Merchant
         void setsTreasures();
         // int setCeramicPot(int Ceramic_Pot);
         void displayMenu();
-
+        void breakCeramic(int Ceramic); 
+        void breakFrying(int Fry);
+        void breakCauldron(int Cauld);
         
         
 
@@ -60,4 +63,6 @@ class Merchant
 
 };
 #endif
+
+
 
