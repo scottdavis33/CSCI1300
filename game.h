@@ -1,3 +1,7 @@
+// CSCI 1300 Fall 2022
+// Author: Jared Preyer && Scott Davis 
+// Recitation: 105 - Reagan Rychecky && 308 - Baljot Kaur
+// Project 3 - Dungeon Game
 #ifndef GAME_H
 #define GAME_H
 
@@ -12,6 +16,11 @@
 
 
 using namespace std;
+
+
+
+
+
 
 class Game
 {
@@ -29,8 +38,6 @@ private:
     Group group_;
 
     Player player_;
-
-    Merchant merchant_;
 
     vector<string> riddles_;
 
@@ -56,9 +63,9 @@ public:
 
     int NPCCount();
 
-    void move(char, Map&);
+    void move(char, Map& );
 
-    void printActionMenu(Map &map);
+    void printActionMenu();
 
     void investigate();
 
@@ -68,7 +75,12 @@ public:
 
     void printRandomRiddle();
 
+    void CookandEat();
+    Merchant merchant_;
+
 
 };
 
 #endif
+
+
