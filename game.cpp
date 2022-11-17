@@ -210,6 +210,7 @@ void Game::move(char c, Map &m)
 
 void Game::investigate()
 {
+    
     if(rand()%2 == 1)
     {
         player_.setFullness(player_.getFullness() - 1);
@@ -263,12 +264,10 @@ void Game::printActionMenu(Map &map)
         cin >> choice1;
 
         move(choice1, map);
-
-        
     }
     else if(choice == 2)
     {
-        if(map_.isExplored(map_.getPlayerRow(), map_.getPlayerCol()) == true)
+        if(map.isExplored(map.getPlayerRow(), map.getPlayerCol()) == true)
         {
             cout << "This space can not be investigated again, please pick another option" << endl;
         }
