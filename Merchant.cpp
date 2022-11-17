@@ -28,7 +28,7 @@ Merchant::Merchant()
     emerald_ = 0;
     diamond_ = 0;
     gem_ = 0;
-    gold_ = 500;
+    gold_ = 100;
 }
 /*
 Pseudocode Merchant getters
@@ -147,7 +147,6 @@ void Merchant::setIngredients()
 {
     int choiceK = 0;
     int howmanyK = 0;
-    int kilograms = 0;
     char k;
     
         cout << "You have entered the ingredients. Select 1 or 2. " << endl;
@@ -736,14 +735,7 @@ Pseudocode Merchant displayMenu
 */
 void Merchant::displayMenu()
 {
-    // cout << "ceramic pot" << ceramic_pot_ << endl;
-    cout << "Choose one of the following:" << endl
-    << "1. Cookware: You will need something to cook those ingredients." << endl
-    << "2. Ingredients: To make food, you have to cook raw ingredients." << endl
-    << "3. Weapons: It's dangerous to go alone, take this!" << endl
-    << "4. Armor: If you want to survive monster attacks, you will need some armor." << endl
-    << "5. Sell treasures: If you find anything shiny, I would be happy to take it off your hands." << endl
-    << "6. Leave: Make sure you get everything you need. I'm leaving after this sale!" << endl;
+    
     
     cout << "+-------------+" << endl
     << "| INVENTORY   |" << endl
@@ -755,4 +747,28 @@ void Merchant::displayMenu()
     << "| Armor       | " << armor_ << endl
     << "| Treasures   | S: " << silver_ << " | R: " << ruby_ << " | E: " << emerald_ << " | D: " << diamond_ << " | G: " << gem_ << endl;
 
+}
+void Merchant::breakCeramic(int Ceramic)
+{
+    // Ceramic  = Ceramic * 5; // Taking the responsibilites of the input from cook and eat
+    
+    // ingredients_ = Ceramic;
+    // cout << ingredients_ << endl;
+    ingredients_ = ingredients_ - Ceramic;
+    // cout << ingredients_ << endl;
+    // cout << ceramic_pot_ << endl;
+    ceramic_pot_ --; // One cook for pot
+    // cout << ceramic_pot_ << endl;
+    
+}
+void Merchant::breakFrying(int Fry)
+{
+    ingredients_ = ingredients_ - Fry;
+    frying_pan_ --;
+}
+void Merchant::breakCauldron(int Cauld)
+{
+    
+    ingredients_ = ingredients_ - Cauld;
+    cauldron_ --;
 }
