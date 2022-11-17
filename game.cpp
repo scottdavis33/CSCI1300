@@ -2,7 +2,7 @@
 #include <vector>
 #include <fstream>
 #include "Map.h"
-#include "game.h"
+#include "Game.h"
 #include "Monster.h"
 #include "Player.h"
 #include "Group.h"
@@ -238,51 +238,10 @@ void Game::monsterFight()
 {
 
 }
-
-void Game::printActionMenu(Map &map)
+void Game::CookandEat()
 {
-    int choice;
-    do{
-    cout << "Please select an action: " << endl;
-    cout << endl;
-    cout << "1. Move" << endl;
-    cout << "2. Investigate" << endl;
-    cout << "3. Pick a Fight" << endl;
-    cout << "4. Cook and Eat" << endl;
-    cout << "5. Give up" << endl;
-    cin >> choice;
-
-    if(choice <=0 || choice > 5)
-    {
-        cout << "Invalid input, please select a different action" << endl;
-    }
-
-    if(choice == 1)
-    {
-        char choice1;
-        cout << "What direction would you like to move in? (wasd)" << endl;
-        cin >> choice1;
-
-        move(choice1, map);
-    }
-    else if(choice == 2)
-    {
-        if(map.isExplored(map.getPlayerRow(), map.getPlayerCol()) == true)
-        {
-            cout << "This space can not be investigated again, please pick another option" << endl;
-        }
-        else
-        {
-            investigate();
-        }
-    }
-    else if(choice == 3)
-    {
-        // Random monster appears
-    }
-    else if(choice == 4)
-    {
-        int Ceramic = 0;
+        // Needs to add the cookware increase in fullness if completed successfully
+        int Ceramic = 0; // This function only
         int Frying = 0;
         int Cauldron = 0;
         int cook = 0;
@@ -292,6 +251,7 @@ void Game::printActionMenu(Map &map)
         cout << "1. Ceramic Pot. " << endl;
         cout << "2. Frying Pan. " << endl;
         cout << "3. Cauldron " << endl;
+        cout << "4. Quit." << endl;
         cin >> cook;
         switch(cook)
         {
@@ -301,11 +261,24 @@ void Game::printActionMenu(Map &map)
                 cin >> Ceramic;
                 
                 // Need to add the 5:1 Ratio check
-                int random1 = rand()%4;
-                if(random1 == 0)
+                if(Ceramic%5 == 0)
                 {
-                    merchant_.breakCookware();
+                    // int random1 = rand()%4;
+                    int random1 = rand()%4;
+                    if(random1 == 0)
+                    {
+                        merchant_.breakCeramic(Ceramic);
+                    }
+
                 }
+                else
+                {
+                    
+                    // Needs to add the cookware increase in fullness if completed successfully
+                    return;
+                }
+                break;
+               
 
             }
             case 2:
@@ -313,8 +286,19 @@ void Game::printActionMenu(Map &map)
                 cout << "How many of kilograms of ingredients would you like to use with a 5(kg):1(ingredient) ratio ? " << endl;
                 cin >> Frying;
 
-                // Need to add the 5:1 Ratio check
-
+                // Need to add the 5:1 Ratio check with fullness
+                if(Frying%5 == 0)
+                {
+                    int random2 = rand()%10;
+                    if(random2 == 0)
+                    {
+                        merchant_.breakFrying(Frying);
+                    }
+                }
+                else 
+                {
+                    return;
+                }
                 
             }
             case 3:
@@ -322,26 +306,78 @@ void Game::printActionMenu(Map &map)
                 cout << "How many of kilograms of ingredients would you like to use with a 5(kg):1(ingredient) ratio ? " << endl;
                 cin >> Cauldron;
                 
-                int random3 = rand()%50;
-
-                if(random == 0)
+                
+                if(Cauldron%5 == 0)
                 {
-                    merchant_.breakCookware();
+                    int random3 = rand()%50;
+                    if(random3 == 0)
+                    {
+                        merchant_.breakCauldron(Cauldron);
+                    }
+                }
+                else
+                {
+                    return;
                 }
             }
             default:
             cout << "Incorrect Input. " << endl;
             return;
         }
-        
-    }
-    else if(choice ==5)
-    {
-        cout << "You are a pussy" << endl;
-    }
-
-    }while(choice != 5);
 }
+
+void Game::printActionMenu()
+{
+    int choice;
+    // do{
+        cout << "Please select an action: " << endl;
+        cout << endl;
+        cout << "1. Move" << endl;
+        cout << "2. Investigate" << endl;
+        cout << "3. Pick a Fight" << endl;
+        cout << "4. Cook and Eat" << endl;
+        cout << "5. Give up" << endl;
+        // cin >> choice;
+
+        // if(choice <=0 || choice > 5)
+        // {
+        //     cout << "Invalid input, please select a different action" << endl;
+        // }
+
+        // if(choice == 1)
+        // {
+        //     char choice1;
+        //     cout << "What direction would you like to move in? (wasd)" << endl;
+        //     cin >> choice1;
+
+        //     move(choice1, map);
+        // }
+        // else if(choice == 2)
+        // {
+        //     if(map.isExplored(map.getPlayerRow(), map.getPlayerCol()) == true)
+        //     {
+        //         cout << "This space can not be investigated again, please pick another option" << endl;
+        //     }
+        //     else
+        //     {
+        //         investigate();
+        //     }
+        // }
+        // else if(choice == 3)
+        // {
+        //     // Random monster appears
+        // }
+        // else if(choice == 4)
+        // {  
+        //         CookandEat();
+        // }
+       
+}
+        
+    
+
+
+ 
 
 
 
