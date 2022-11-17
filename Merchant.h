@@ -5,6 +5,8 @@
 #include <iostream>
 #ifndef Merchant_H
 #define Merchant_H
+// #include "game.h"
+#include "Map.h"
 using namespace std;
 
 /*
@@ -37,6 +39,7 @@ class Merchant
         void breakCeramic(int Ceramic); 
         void breakFrying(int Fry);
         void breakCauldron(int Cauld);
+        void findtreasures();
         
         
 
@@ -63,6 +66,3 @@ class Merchant
 
 };
 #endif
-
-
-
