@@ -114,6 +114,7 @@ void Game::printMonsters()
     {
         cout << monsters_.at(i).getName() << endl;
         cout << monsters_.at(i).getLevel() << endl;
+
     }
 }
 
@@ -208,6 +209,16 @@ void Game::move(char c, Map &m)
     }
 }
 
+
+Monster Game::getRandomMonster()
+{
+    // int x = rand()%4;
+
+    // monsterIndex_ = x;
+
+    // return monsters_.at(x);
+}
+
 void Game::investigate()
 {
     
@@ -234,9 +245,39 @@ void Game::investigate()
     }
 }
 
+string Game::getMonsterName()
+{
+    int x = rand()%4;
+
+    return monsters_.at(x).getName();
+}
+
+
 void Game::monsterFight()
 {
+    int choice;
+    string y = getMonsterName();
+    cout << y << " AHEAD! THEY LOOK HOSTILE!" << endl;
 
+    // If the number of weapons in inbentory is greater than 1
+
+    cout << "1. Fight" << endl;
+    cout << "2. Surrender" << endl;
+    cin >> choice;
+
+    if(choice == 1)
+    {
+        // Fighting a monster is based on how many weapons we have in our inventory, make
+        // sure that when a player dies his weapon is removed from the groups inventory
+    }
+    else if(choice == 2)
+    {
+        
+    }
+    else
+    {
+        cout << "Invalid input" << endl;
+    }
 }
 void Game::CookandEat()
 {
@@ -326,6 +367,12 @@ void Game::CookandEat()
         }
 }
 
+// Merchant Game::getMerchant(Merchant merchant)
+// {
+//     return merchant_;
+// }
+
+
 void Game::printActionMenu()
 {
     int choice;
@@ -373,12 +420,3 @@ void Game::printActionMenu()
         // }
        
 }
-        
-    
-
-
- 
-
-
-
-
