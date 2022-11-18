@@ -267,6 +267,11 @@ void Game::monsterFight()
 
     if(choice == 1)
     {
+        // Ckeck if the party has purchased any upgraded weapons that are worth 5 gold pieces or more then add 
+        // bonus points for each upgraded weapon.
+        // Each party member can only hold one weapon, so if a party member has died, 
+        // their weapon cannot contribute to the party weapon strength
+        // w = # of weapons the party possesses + the bonus point(s) for each upgraded weapon
         // Fighting a monster is based on how many weapons we have in our inventory, make
         // sure that when a player dies his weapon is removed from the groups inventory
     }
