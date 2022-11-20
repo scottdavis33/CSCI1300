@@ -1,12 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <string>
 #include "Map.h"
 #include "Game.h"
 #include "Monster.h"
 #include "Player.h"
 #include "Group.h"
 #include "Merchant.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -62,6 +64,8 @@ Game::Game()
                 monster = Monster(temp_array[0], stoi(temp_array[1]));
                 
                 monsters_.push_back(monster);
+
+                levels.push_back(stoi(temp_array[1]));
             }
         }
     }    
@@ -112,8 +116,8 @@ void Game::printMonsters()
 {
     for(int i = 0; i < 21; i++)
     {
-        cout << monsters_.at(i).getName() << endl;
-        cout << monsters_.at(i).getLevel() << endl;
+        cout << monsters_.at(i).getMName() << endl;
+        cout << monsters_.at(i).getMLevel() << endl;
 
     }
 }
@@ -210,15 +214,6 @@ void Game::move(char c, Map &m)
 }
 
 
-Monster Game::getRandomMonster()
-{
-    // int x = rand()%4;
-
-    // monsterIndex_ = x;
-
-    // return monsters_.at(x);
-}
-
 void Game::investigate()
 {
     
@@ -247,11 +242,40 @@ void Game::investigate()
 
 string Game::getMonsterName()
 {
+
     int x = rand()%4;
+
+    vectorIndex_ = x;
 
     return monsters_.at(x).getName();
 }
 
+
+double Game::OutcomeBattle()
+{
+    merchant_.WeaponUpgrade();
+    
+    // Checks if Weapon Ratio
+    double WeapRat = (merchant_.club_ + merchant_.spear_ + merchant_.rapier_ + merchant_.axe_ + merchant_.sword_ )/5;
+    
+    if(WeapRat < 1)
+    {
+        return WeapRat;
+    }
+    else
+    {
+        WeapRat = 0;
+    }
+    
+    // number of sets of armor the party posse
+    int y = merchant_.getArmor();
+    // When reading a file get the level of what monster is being used
+
+    int FirstRandom = rand()%6 + 1;
+    int SecondRandom = rand()%6 + 1;
+    
+    double Outcome1 = ((FirstRandom * WeaponUpgrade() + /* If every party member */) - (SecondRandom * vectorIndex_)/y ) 
+}
 
 void Game::monsterFight()
 {
@@ -267,13 +291,7 @@ void Game::monsterFight()
 
     if(choice == 1)
     {
-        // Ckeck if the party has purchased any upgraded weapons that are worth 5 gold pieces or more then add 
-        // bonus points for each upgraded weapon.
-        // Each party member can only hold one weapon, so if a party member has died, 
-        // their weapon cannot contribute to the party weapon strength
-        // w = # of weapons the party possesses + the bonus point(s) for each upgraded weapon
-        // Fighting a monster is based on how many weapons we have in our inventory, make
-        // sure that when a player dies his weapon is removed from the groups inventory
+        
     }
     else if(choice == 2)
     {
@@ -372,12 +390,6 @@ void Game::CookandEat()
         }
 }
 
-// Merchant Game::getMerchant(Merchant merchant)
-// {
-//     return merchant_;
-// }
-
-
 void Game::printActionMenu()
 {
     int choice;
@@ -425,3 +437,9 @@ void Game::printActionMenu()
         // }
        
 }
+
+Group Game::getGroup()
+{
+    return Group_;
+}
+
