@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "Merchant.h"
+#include "Game.h"
 using namespace std;
 /*
 Pseudocode Merchant Menu default constructor
@@ -208,6 +209,7 @@ Pseudocode Merchant getCookware
 4. Use the random number generator. (Each pot has a probability of breaking. If remainder == 0 they have broke their pot)
 5. If player tries to buy more then the actual gold they have prompt user with error message
 6. After payments have been confirmed. Reprompt menu with updated purchases
+
 */
 void Merchant::setCookware()
 {
@@ -396,6 +398,7 @@ Pseudocode Merchant setWeapons
 4. set up a do while which with conditions
 5. Subtract how many every gold then want from there purchase
 6. Reprompt them with the same options until gold is not suffient || they want to exit Menu
+
 */
 void Merchant::setWeapons()
 {
@@ -444,6 +447,17 @@ void Merchant::setWeapons()
                             {
                                 gold_ = gold_ - (howmany1 * 2);
                                 club_ = howmany1;
+                                // Every player is assigned a weapon.
+                                // for(int i = 0; i <5; i++)
+                                // {
+                                //     if(player[i].weaponCount_ == 0)
+                                //     {
+                                        
+
+                                //         break;
+                                //     }
+                                // }
+
                                 cout << "Thank you for your patronage! What else can I get for you?" << endl;
                             }
                             return;
@@ -622,8 +636,6 @@ void Merchant::setWeapons()
     } while (choice != 6);
     
 }
-
-
 void Merchant::setsTreasures()
 {
     int select = 0;
@@ -740,12 +752,12 @@ void Merchant::displayMenu()
     cout << "+-------------+" << endl
     << "| INVENTORY   |" << endl
     << "+-------------+" << endl
-    << "| Gold        | " << gold_ << endl
+    << "| Gold        | " << gold_ << endl;
     << "| Ingredients | " << ingredients_ << " kg" << endl
     << "| Cookware    | P: " << ceramic_pot_ << " |  F: " << frying_pan_ << "| C: " << cauldron_ << endl
     << "| Weapons     | C: " << club_ << " | S: " << spear_ << " | R: " << rapier_ << " | A: " << axe_ << " | SW: " << sword_ << endl
     << "| Armor       | " << armor_ << endl
-    << "| Treasures   | S: " << silver_ << " | R: " << ruby_ << " | E: " << emerald_ << " | D: " << diamond_ << " | G: " << gem_ << endl;
+    << "| Treasures   | S: " << silver_ << " | R: " << ruby_ << " | E: " << emerald_ << " | D: " << diamond_ << " | G: " << gem_ << endl
 
 }
 void Merchant::breakCeramic(int Ceramic)
@@ -772,3 +784,33 @@ void Merchant::breakCauldron(int Cauld)
     ingredients_ = ingredients_ - Cauld;
     cauldron_ --;
 }
+
+int Merchant::WeaponUpgrade()
+{
+    int Weapons = 0;
+    // Checks the number of weapons. Makes the weapons strength
+    if(Weapons.getWeaponns() >= 1)
+    {
+        if(rapier_ >= 1)
+        {
+            rapier_++;
+        }
+        else if(axe_ >= 1)
+        {
+            axe_ +=2;
+        }
+        else if(sword_ >= 1)
+        {
+            sword_+=3;
+        }
+        else 
+        {
+            return getWeapons();
+        }
+    }
+}
+
+
+
+
+
