@@ -1,12 +1,12 @@
 // CSCI 1300 Fall 2022
-// Author: Jared Preyer && Scott Davis 
-// Recitation: 105 - Reagan Rychecky && 308 - Baljot Kaur
-// Project 3 - Class Merchant
+// Author: Jared Preyer
+// Recitation: 105 - Reagan Rychecky
+// Project 3 - Class 1
 #include <iostream>
+#include "Game.h"
+#include "Monster.h"
 #ifndef Merchant_H
 #define Merchant_H
-// #include "game.h"
-#include "Map.h"
 using namespace std;
 
 /*
@@ -15,7 +15,6 @@ Pseudocode Merchant Menu
 2. Each setter has its own parameters as shown in the right up
 3. This menu is only applicable if players want to take advantage before there journey
 */
-
 class Merchant
 {
     public:
@@ -39,8 +38,9 @@ class Merchant
         void breakCeramic(int Ceramic); 
         void breakFrying(int Fry);
         void breakCauldron(int Cauld);
-        void findtreasures();
-        
+        int WeaponUpgrade();
+      
+       
         
 
 
@@ -66,3 +66,4 @@ class Merchant
 
 };
 #endif
+
