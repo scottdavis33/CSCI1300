@@ -27,7 +27,13 @@ class Game
 private:
     vector<Monster> monsters_;
 
+    vector<int> levels_;
+
     int sorcerer_anger_;
+
+    int vectorIndex_;
+
+    
 
     Map map_;
 
@@ -76,11 +82,19 @@ public:
     void printRandomRiddle();
 
     void CookandEat();
+
+    int MonsterChallenge();
+
+    double OutcomeBattle();
+
+    int WeaponRatio();
+
+    Group getGroup();
+    
     Merchant merchant_;
+    
 
 
 };
 
 #endif
-
-
