@@ -28,9 +28,17 @@ class Group
          void setFullandName();
          void setPlayerWeaponAt(int, int); 
          Player getPlayerAt(int index);
+         int getBonus();
+         int getNumWeapons();
+         void setArmor2(int);
+         int getArmor2();
+        
          
     private:
 
         Player players[5];
+        int bonus_;
+        int numWeapons_;
+        int armor_;
 };
 #endif
