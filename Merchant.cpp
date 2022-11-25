@@ -71,7 +71,7 @@ Pseudocode Merchant setArmor
 5. Subtract each armor that they get from their total amount of gold
 6. After all reprompt user to the Inventory Menu that shows them how many goods they have
 */
-void Merchant::setArmor()
+void Merchant::setArmor(Group &G)
 
 {
     int choice7 = 0;
@@ -105,12 +105,13 @@ void Merchant::setArmor()
                     {
                         cout << "Insufficient funds" << endl;
                     }
-                    else if (gold_ + howmany7 > 5)
+                    else if (armor_ + howmany7 > 5)
                     {
                         cout << "You can only purchase a maximum of 5 armor pieces, one per player." << endl;
                     }
                     else
                     {
+                        G.setArmor2(howmany7);
                         gold_ = gold_ - (howmany7 * 25);
                         armor_ = armor_ + howmany7;
                         cout << "Thank you for your patronage! What else can I get for you?" << endl;
@@ -432,9 +433,6 @@ void Merchant::setWeapons(Group &G)
                                 {
                                     G.setPlayerWeaponAt(i, 1);
 
-                                    cout << "Player weapon " << endl;
-                                    cout << G.getPlayerAt(1).getWeapon() << endl;
-
                                     counter++;
                                     if (counter == howmany1)
                                     {
@@ -667,7 +665,7 @@ void Merchant::setWeapons(Group &G)
                             {
                                 if (G.getPlayerAt(i).getWeapon() == 0)
                                 {
-                                    G.setPlayerWeaponAt(i, 3);
+                                    G.setPlayerWeaponAt(i, 5);
                                     counter++;
                                     if (counter == howmany1)
                                     {
