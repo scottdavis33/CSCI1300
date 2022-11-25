@@ -33,7 +33,7 @@ class Merchant
         void setIngredients();
         void setWeapons(Group&);
         void setCookware();
-        void setArmor();
+        void setArmor(Group&);
         void setsTreasures();
         // int setCeramicPot(int Ceramic_Pot);
         void displayMenu();
@@ -66,6 +66,7 @@ class Merchant
         int gem_;
         int gold_;
         int weapons_;
+        
         
 
 };
