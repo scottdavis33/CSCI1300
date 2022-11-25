@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "Monster.h"
+#include "Merchant.h"
 #ifndef Group_H
 #define Group_H
 using namespace std;
@@ -25,9 +26,9 @@ class Group
          int getFull(int index);
          // setters
          void setFullandName();
+         void setPlayerWeaponAt(int, int); 
+         Player getPlayerAt(int index);
          
-
-
     private:
 
         Player players[5];
