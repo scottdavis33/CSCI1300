@@ -1,14 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <string>
 #include "Map.h"
 #include "Game.h"
 #include "Monster.h"
 #include "Player.h"
 #include "Group.h"
 #include "Merchant.h"
-#include <cstdlib>
 
 using namespace std;
 
@@ -64,8 +62,6 @@ Game::Game()
                 monster = Monster(temp_array[0], stoi(temp_array[1]));
                 
                 monsters_.push_back(monster);
-
-                levels.push_back(stoi(temp_array[1]));
             }
         }
     }    
@@ -116,8 +112,8 @@ void Game::printMonsters()
 {
     for(int i = 0; i < 21; i++)
     {
-        cout << monsters_.at(i).getMName() << endl;
-        cout << monsters_.at(i).getMLevel() << endl;
+        cout << monsters_.at(i).getName() << endl;
+        cout << monsters_.at(i).getLevel() << endl;
 
     }
 }
@@ -214,6 +210,15 @@ void Game::move(char c, Map &m)
 }
 
 
+Monster Game::getRandomMonster()
+{
+    // int x = rand()%4;
+
+    // monsterIndex_ = x;
+
+    // return monsters_.at(x);
+}
+
 void Game::investigate()
 {
     
@@ -242,44 +247,16 @@ void Game::investigate()
 
 string Game::getMonsterName()
 {
-
     int x = rand()%4;
-
-    vectorIndex_ = x;
 
     return monsters_.at(x).getName();
 }
 
 
-double Game::OutcomeBattle()
-{
-    merchant_.WeaponUpgrade();
-    
-    // Checks if Weapon Ratio
-    double WeapRat = (merchant_.club_ + merchant_.spear_ + merchant_.rapier_ + merchant_.axe_ + merchant_.sword_ )/5;
-    
-    if(WeapRat < 1)
-    {
-        return WeapRat;
-    }
-    else
-    {
-        WeapRat = 0;
-    }
-    
-    // number of sets of armor the party posse
-    int y = merchant_.getArmor();
-    // When reading a file get the level of what monster is being used
-
-    int FirstRandom = rand()%6 + 1;
-    int SecondRandom = rand()%6 + 1;
-    
-    double Outcome1 = ((FirstRandom * WeaponUpgrade() + /* If every party member */) - (SecondRandom * vectorIndex_)/y ) 
-}
-
-void Game::monsterFight()
+void Game::monsterFight(Group &G)
 {
     int choice;
+    int d;
     string y = getMonsterName();
     cout << y << " AHEAD! THEY LOOK HOSTILE!" << endl;
 
@@ -288,6 +265,18 @@ void Game::monsterFight()
     cout << "1. Fight" << endl;
     cout << "2. Surrender" << endl;
     cin >> choice;
+
+    // calculations for variable d
+    if
+    (
+    G.getPlayerAt(0).getWeapon() != G.getPlayerAt(1).getWeapon() &&
+    G.getPlayerAt(1).getWeapon() != G.getPlayerAt(2).getWeapon() &&
+    G.getPlayerAt(2).getWeapon() != G.getPlayerAt(3).getWeapon() &&
+    G.getPlayerAt(3).getWeapon() != G.getPlayerAt(4).getWeapon() 
+    ) 
+    {
+        d = 4;
+    }
 
     if(choice == 1)
     {
@@ -390,6 +379,12 @@ void Game::CookandEat()
         }
 }
 
+// Merchant Game::getMerchant(Merchant merchant)
+// {
+//     return merchant_;
+// }
+
+
 void Game::printActionMenu()
 {
     int choice;
@@ -437,9 +432,3 @@ void Game::printActionMenu()
         // }
        
 }
-
-Group Game::getGroup()
-{
-    return Group_;
-}
-
