@@ -252,11 +252,14 @@ string Game::getMonsterName()
     return monsters_.at(x).getName();
 }
 
-
+// What is still needed from Monster fight:
+// 1. A player must be captured if they lost or surrendured
+// 2. Rewards must be given if the players win
+// 3. 50% chance every player loses energy 
 void Game::monsterFight(Group &G)
 {
     int choice;
-    int d;
+    int d = 0;
     string y = getMonsterName();
     cout << y << " AHEAD! THEY LOOK HOSTILE!" << endl;
 
@@ -277,14 +280,27 @@ void Game::monsterFight(Group &G)
     {
         d = 4;
     }
+    //Calculations for variable w
+    int w = G.getNumWeapons() + G.getBonus(); 
+    //Calculations for variable a
+    int a = G.getArmor2();
+    //Calculation for variable C
+    int c = 1; // for now
+    //Calculation for variable r1
+    int r1 = (1+ rand()%6);
+    int r2 = (1 + rand()%6);
 
     if(choice == 1)
     {
-        
+        if
+        (((r1 * w + d) - ((r2*c)/(a))) > 0)
+        {
+            cout << "You have won the battle!" << endl;
+        }
     }
     else if(choice == 2)
     {
-        
+        cout << "You lost the battle" << endl; // one random player is captured
     }
     else
     {
@@ -379,10 +395,7 @@ void Game::CookandEat()
         }
 }
 
-// Merchant Game::getMerchant(Merchant merchant)
-// {
-//     return merchant_;
-// }
+
 
 
 void Game::printActionMenu()
