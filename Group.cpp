@@ -2,6 +2,7 @@
 // Author: Jared Preyer && Scott Davis 
 // Recitation: 105 - Reagan Rychecky && 308 - Baljot Kaur
 // Project 3 - Class Group
+
 #include <iostream>
 #include "Group.h"
 #include "Player.h"
@@ -61,7 +62,7 @@ string Group::getName(int index)
 
 int Group::getFull(int index)
 {
-    return players[index].getfull();
+    return players[index].getFullness();
 }
 /*
 Pseudocode for status map
@@ -78,10 +79,20 @@ void Group::life(Map map)
     cout << "+-------------+" << endl;
     cout << "|    PARTY    |" << endl;
     cout << "+-------------+" << endl;
-    cout << "| " << players[0].getName() << " | " << "Fullness: " << players[0].getFull() << endl;
-    cout << "| " << players[1].getName() << " | " << "Fullness: " << players[1].getFull() << endl;
-    cout << "| " << players[2].getName() << " | " << "Fullness: " << players[2].getFull() << endl;
-    cout << "| " << players[3].getName() << " | " << "Fullness: " << players[3].getFull() << endl;
-    cout << "| " << players[4].getName() << " | " << "Fullness: " << players[4].getFull() << endl;
+    cout << "| " << players[0].getName() << " | " << "Fullness: " << players[0].getFullness() << endl;
+    cout << "| " << players[1].getName() << " | " << "Fullness: " << players[1].getFullness() << endl;
+    cout << "| " << players[2].getName() << " | " << "Fullness: " << players[2].getFullness() << endl;
+    cout << "| " << players[3].getName() << " | " << "Fullness: " << players[3].getFullness() << endl;
+    cout << "| " << players[4].getName() << " | " << "Fullness: " << players[4].getFullness() << endl;
     cout << "+-------------+" << endl;
+}
+
+void Group::setPlayerWeaponAt(int index, int weapon)
+{
+    players[index].setWeapon(weapon);
+}
+
+Player Group::getPlayerAt(int index)
+{
+    return players[index];
 }
