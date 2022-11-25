@@ -89,10 +89,46 @@ void Group::life(Map map)
 
 void Group::setPlayerWeaponAt(int index, int weapon)
 {
+    if(weapon == 3)
+    {
+        bonus_++;
+    }
+    else if(weapon == 4)
+    {
+        bonus_ = bonus_ + 2;
+    }
+    else if(weapon == 5)
+    {
+        bonus_ = bonus_ + 3;
+    }
+    else
+    {
+        numWeapons_++;
+    }
+
+    
+
     players[index].setWeapon(weapon);
 }
 
 Player Group::getPlayerAt(int index)
 {
     return players[index];
+}
+
+int Group::getBonus()
+{
+    return bonus_;
+}
+int Group:: getNumWeapons()
+{
+    return numWeapons_;
+}
+void Group::setArmor2(int x)
+{
+    armor_ = armor_ + x;
+}
+int Group::getArmor2()
+{
+    return armor_;
 }
