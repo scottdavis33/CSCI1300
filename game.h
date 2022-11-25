@@ -27,13 +27,7 @@ class Game
 private:
     vector<Monster> monsters_;
 
-    vector<int> levels_;
-
     int sorcerer_anger_;
-
-    int vectorIndex_;
-
-    
 
     Map map_;
 
@@ -50,6 +44,10 @@ private:
     vector<string> answers_;
 
     string answer_;
+
+    int monsterIndex_;
+
+    // Merchant merchant_;
 
 public:
 
@@ -75,7 +73,7 @@ public:
 
     void investigate();
 
-    void monsterFight();
+    void monsterFight(Group&);
 
     void NPCEncounter(Map&);
 
@@ -83,16 +81,14 @@ public:
 
     void CookandEat();
 
-    int MonsterChallenge();
+    Monster getRandomMonster();
 
-    double OutcomeBattle();
+    string getMonsterName();
 
-    int WeaponRatio();
-
-    Group getGroup();
-    
     Merchant merchant_;
-    
+
+
+    // Merchant getMerchant(Merchant);
 
 
 };
