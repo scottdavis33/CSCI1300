@@ -32,6 +32,8 @@ class Group
          int getNumWeapons();
          void setArmor2(int);
          int getArmor2();
+         void setArmorAt(int);
+         int numPlayers();
         
          
     private:
