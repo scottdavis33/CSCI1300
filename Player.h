@@ -1,7 +1,7 @@
 // CSCI 1300 Fall 2022
-// Author: Jared Preyer && Scott Davis 
-// Recitation: 105 - Reagan Rychecky && 308 - Baljot Kaur
-// Project 3 - Class Player
+// Author: Scott Davis
+// Recitation: 308 – Baljot Kaur
+// Project 3 - Class 4
 #include <iostream>
 #ifndef Player_H
 #define Player_H
@@ -22,6 +22,8 @@ private:
     int fullness_;
     string name_;
     bool life_;
+    int weapon_ = 0;
+    bool armor_;
 
 public:
     // default and parameterized constructor
@@ -36,9 +38,13 @@ public:
     // Setters
     void setName(string name);
     void setLife(bool life);
-    int setFullness(int fullness);
+    void setFullness(int fullness);
+    int getWeapon();
+    void setWeapon(int);
     // for moving each individual player
     void movement();
+    void setArmor();
+    bool checkArmor();
 
 };
 #endif
