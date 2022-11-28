@@ -46,6 +46,10 @@ class Merchant
         int getSpear();
         int getAxe();
         int getRapier();
+        void addGold(int);
+        void addIngrediants(int);
+        void subGold(int);
+        int getGold();
         
 
     private:
