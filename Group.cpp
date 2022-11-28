@@ -132,3 +132,22 @@ int Group::getArmor2()
 {
     return armor_;
 }
+
+void Group::setArmorAt(int x)
+{
+    players[x].setArmor();
+}
+
+int Group::numPlayers()
+{
+    int counter = 0;
+    for(int i = 0; i < 5;  i++)
+    {
+        if(players[i].getName() != "Dead")
+        {
+            counter ++;
+        }
+    }
+    return counter;
+}
+
