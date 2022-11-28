@@ -74,6 +74,7 @@ Pseudocode Merchant setArmor
 void Merchant::setArmor(Group &G)
 
 {
+    int counter = 0;
     int choice7 = 0;
     int howmany7 = 0;
     char choice3;
@@ -111,6 +112,19 @@ void Merchant::setArmor(Group &G)
                     }
                     else
                     {
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (G.getPlayerAt(i).checkArmor() == false)
+                                {
+                                    G.setArmorAt(i);
+
+                                    counter++;
+                                    if (counter == howmany7)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
                         G.setArmor2(howmany7);
                         gold_ = gold_ - (howmany7 * 25);
                         armor_ = armor_ + howmany7;
@@ -864,4 +878,32 @@ void Merchant::setWeapons(Group &G)
     int Merchant::getSword()
     {
         return sword_;
+    }
+
+    void Merchant::addGold(int x)
+    {
+        gold_ = gold_ + x;
+    }
+
+    void Merchant::addIngrediants(int x)
+    {
+        if(ingredients_ + x < 0)
+        {
+            ingredients_ = 0;
+        }
+        else
+        {
+            ingredients_ = ingredients_ + x;
+        }
+        
+    }
+
+    void Merchant::subGold(int x) 
+    {
+        gold_ = gold_ - x;
+    }
+
+    int Merchant::getGold()
+    {
+        return gold_;
     }
