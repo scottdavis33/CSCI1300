@@ -210,14 +210,14 @@ void Game::move(char c, Map &m)
 }
 
 
-Monster Game::getRandomMonster()
-{
-    // int x = rand()%4;
+// Monster Game::getRandomMonster()
+// {
+//     // int x = rand()%4;
 
-    // monsterIndex_ = x;
+//     // monsterIndex_ = x;
 
-    // return monsters_.at(x);
-}
+//     // return monsters_.at(x);
+// }
 
 void Game::investigate()
 {
@@ -247,9 +247,10 @@ void Game::investigate()
 
 string Game::getMonsterName()
 {
-    int x = rand()%4;
-
-    return monsters_.at(x).getName();
+    int x = rand() % 4;
+    string name = monsters_.at(x).getName();
+    monsters_.erase(monsters_.begin()+x);
+    return name;
 }
 
 // What is still needed from Monster fight:
@@ -262,6 +263,8 @@ void Game::monsterFight(Group &G)
     int d = 0;
     string y = getMonsterName();
     cout << y << " AHEAD! THEY LOOK HOSTILE!" << endl;
+
+
 
     // If the number of weapons in inbentory is greater than 1
 
@@ -285,22 +288,98 @@ void Game::monsterFight(Group &G)
     //Calculations for variable a
     int a = G.getArmor2();
     //Calculation for variable C
-    int c = 1; // for now
+    int c = 1; // for now (Based on rooms cleared)
     //Calculation for variable r1
-    int r1 = (1+ rand()%6);
-    int r2 = (1 + rand()%6);
+    int r1 = rand()%6 + 1;
+    int r2 = rand()%6 + 1;
 
     if(choice == 1)
     {
+
+       
         if
-        (((r1 * w + d) - ((r2*c)/(a))) > 0)
+        (((r1 * w + d) - ((r2*c)/(1))) > 0)
         {
             cout << "You have won the battle!" << endl;
+            merchant_.addGold(10*c);
+            merchant_.addIngrediants(5 * c);
+            if(rand()%10 == 2)
+            {
+                keys_++;
+            }
+
+        }
+        else
+        {
+            int j = rand()%5;
+            cout << "You have lost the battle" << endl;
+
+            merchant_.subGold(merchant_.getGold() / 4);
+
+            cout << "The monster took " << (merchant_.getGold() /4) << " gold from the group!" << endl;
+
+            for(int i = 0; i < G.numPlayers(); i++)
+            {
+                if(G.getPlayerAt(i).checkArmor() == false)
+                {
+                    if(rand() % 10 == 3)
+                    {
+                        cout << "You'll forever be scarred from watching the monster dismember " << G.getPlayerAt(i).getName() << " limb for limb." << endl;
+                    }
+                }
+                else if (G.getPlayerAt(i).checkArmor() == true)
+                {
+                    if(rand() % 20 == 4)
+                    {
+                        cout << "In order to save yourself, you pushed " << G.getPlayerAt(i).getName() << " out of your way and the monster killed them :(" << endl;
+                    }
+                }
+            }
+ 
+            for(int i = 0; i < G.numPlayers(); i++)
+            {
+                if(rand()%2 == 1);
+                G.getPlayerAt(i).setFullness(G.getPlayerAt(i).getFullness() - 1);
+            }
+
+            if(j == 0)
+            {
+                merchant_.addIngrediants(-5);
+                cout << "You lost 5 kg of ingredients" << endl;
+            }
+            else if( j == 0)
+            {
+                merchant_.addIngrediants(-10);
+                cout << "You lost 10 kg of ingredients" << endl;
+            }
+            else if(j == 1)
+            {
+                merchant_.addIngrediants(-15);
+                cout << "You lost 15 kg of ingredients" << endl;
+            }
+            else if(j == 2)
+            {
+                merchant_.addIngrediants(-20);
+                cout << "You lost 20 kg of ingredients" << endl;
+            }
+            else if(j == 3)
+            {
+                merchant_.addIngrediants(-25);
+                cout << "You have lost 25 kg of ingredients" << endl;
+            }
+            else if (j ==4)
+            {
+                merchant_.addIngrediants(-30);
+                cout << "You have lost 30 kg of ingredients" << endl;
+            }
+
         }
     }
     else if(choice == 2)
     {
         cout << "You lost the battle" << endl; // one random player is captured
+        int a = rand()%4 + 1;
+        cout << G.getPlayerAt(a).getName() << " called the monster a homophobic slur, resulting in him getting his face repeatedly bashed against the dungeon wall" << endl;
     }
     else
     {
@@ -409,39 +488,5 @@ void Game::printActionMenu()
         cout << "3. Pick a Fight" << endl;
         cout << "4. Cook and Eat" << endl;
         cout << "5. Give up" << endl;
-        // cin >> choice;
-
-        // if(choice <=0 || choice > 5)
-        // {
-        //     cout << "Invalid input, please select a different action" << endl;
-        // }
-
-        // if(choice == 1)
-        // {
-        //     char choice1;
-        //     cout << "What direction would you like to move in? (wasd)" << endl;
-        //     cin >> choice1;
-
-        //     move(choice1, map);
-        // }
-        // else if(choice == 2)
-        // {
-        //     if(map.isExplored(map.getPlayerRow(), map.getPlayerCol()) == true)
-        //     {
-        //         cout << "This space can not be investigated again, please pick another option" << endl;
-        //     }
-        //     else
-        //     {
-        //         investigate();
-        //     }
-        // }
-        // else if(choice == 3)
-        // {
-        //     // Random monster appears
-        // }
-        // else if(choice == 4)
-        // {  
-        //         CookandEat();
-        // }
-       
 }
+
