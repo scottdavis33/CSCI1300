@@ -51,6 +51,14 @@ class Merchant
         void subGold(int);
         int getGold();
         
+        void addSilver();
+        void addRuby();
+        void addEmerald();
+        void addDiamond_();
+        void addGem();
+        void addGold();
+        void misfortune();
+        void InventoryMenu();
 
     private:
         int club_;
@@ -74,4 +82,5 @@ class Merchant
         
 
 };
+
 #endif
