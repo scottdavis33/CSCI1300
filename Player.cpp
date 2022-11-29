@@ -85,13 +85,22 @@ int Player::getWeapon()
     return weapon_;
 }
 
-void Player::setArmor()
+void Player::setArmor(bool x)
 {
-    armor_ = true;
+    armor_ = x;
 }
 
 bool Player::checkArmor()
 {
     return armor_;
+}
+
+
+void Player::invest()
+{
+    if(rand()%2 == 1)
+    {
+        fullness_ = fullness_ - 1;
+    }
 }
 
