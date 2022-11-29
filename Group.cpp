@@ -176,6 +176,15 @@ void Group::groupInvest()
     players[4].invest();
 }
 
+void Group::groupDoor()
+{
+    players[0].door();
+    players[1].door();
+    players[2].door();
+    players[3].door();
+    players[4].door();
+}
+
 void Group::killPlayerAt(int index)
 {
     players[index].setName("Dead");
