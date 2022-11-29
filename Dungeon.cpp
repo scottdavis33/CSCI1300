@@ -7,7 +7,7 @@
 #include "Map.h"
 #include "Merchant.h"
 #include "Player.h"
-#include "Game.h"
+#include "game.h"
 
 int main()
 {
@@ -53,12 +53,12 @@ int main()
             }
             case 3:
             {
-                Eat.merchant_.setWeapons();
+                Eat.merchant_.setWeapons(G);
                 break;
             }
             case 4:
             {
-                Eat.merchant_.setArmor();
+                Eat.merchant_.setArmor(G);
                 break;
             }
             case 5:
@@ -97,18 +97,32 @@ int main()
                 }
                 else
                 {
+                    if(rand()%5 == 2)
+                    {
+                        Eat.monsterFight(G);
+                        break;
+                    }
                     Eat.investigate();
                 }
                 break;
             }
             case 3:
             {
+                Eat.monsterFight(G);
                 break;
             }
             case 4:
             {
                 Eat.CookandEat();
                 Eat.merchant_.displayMenu();
+
+                // cout << "Players weapons: " << endl;
+                // cout << "Player 1: " << G.getPlayerAt(0).getWeapon() << endl;
+                // cout << "Player 2: " << G.getPlayerAt(1).getWeapon() << endl;
+                // cout << "Player 3: " << G.getPlayerAt(2).getWeapon() << endl;
+                // cout << "Player 4: " << G.getPlayerAt(3).getWeapon() << endl;
+                // cout << "Player 5: " << G.getPlayerAt(4).getWeapon() << endl;
+
                 break;
             }
             default:
