@@ -49,6 +49,10 @@ private:
 
     int monsterIndex_;
 
+    bool inARoom;
+
+    int doorsCleared_;
+
     // Merchant merchant_;
 
 public:
@@ -75,7 +79,7 @@ public:
 
     void investigate(Group&);
 
-    void monsterFight(Group&);
+    void monsterFight(Group&, Map&);
 
     void NPCEncounter(Group&, Map&);
 
@@ -86,6 +90,10 @@ public:
     Monster getRandomMonster();
 
     string getMonsterName();
+
+    void doorPuzzle(Group&, Map&);
+
+    void roomFight();
 
     Merchant merchant_;
 
