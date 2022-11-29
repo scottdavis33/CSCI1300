@@ -39,6 +39,7 @@ class Group
          int getKeys();
          void groupInvest();
         void killPlayerAt(int);
+        void groupDoor();
          
         
          
