@@ -13,6 +13,12 @@
 
 using namespace std;
 
+Group::Group()
+{
+    armor_ = 0;
+    bonus_ = 0;
+}
+
 void Group::setFullandName()
 {
     string name,name1,name2,name3,name4;
@@ -74,7 +80,7 @@ void Group::life(Map map)
     cout << "|   STATUS    |" << endl;
     cout << "+-------------+" << endl;
     cout << "+-------------+" << endl;
-    cout << "| Rooms Cleared: " << map.getRoomCount() << "| Keys: 0|" << "Anger Level: 0" << endl;
+    cout << "| Rooms Cleared: " << map.getRoomCount() << "| Keys: " << keys_ << " | Anger Level: 0" << endl;
     cout << "+-------------+" << endl;    
     cout << "+-------------+" << endl;
     cout << "|    PARTY    |" << endl;
@@ -135,7 +141,7 @@ int Group::getArmor2()
 
 void Group::setArmorAt(int x)
 {
-    players[x].setArmor();
+    players[x].setArmor(true);
 }
 
 int Group::numPlayers()
@@ -151,3 +157,30 @@ int Group::numPlayers()
     return counter;
 }
 
+void Group::addKey()
+{
+    keys_++;
+}
+
+int Group::getKeys()
+{
+    return keys_;
+}
+
+void Group::groupInvest()
+{
+    players[0].invest();
+    players[1].invest();
+    players[2].invest();
+    players[3].invest();
+    players[4].invest();
+}
+
+void Group::killPlayerAt(int index)
+{
+    players[index].setName("Dead");
+    players[index].setWeapon(rand());
+    players[index].setFullness(0);
+    players[index].setLife(false);
+    players[index].setArmor(false);
+}
