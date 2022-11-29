@@ -181,12 +181,7 @@ void Game::NPCEncounter(Map &map)
         {
             cout << "You got the right answer!" << endl;
         }
-
-
-
     }
-
-
 }
 
 
@@ -229,15 +224,12 @@ void Game::investigate()
     if(rand()%5 == 2)
     {
         cout << "You found hidden treasure!" << endl;
-
-    }
-    if(rand()%5 == 2)
-    {
-        cout << "Uh oh! You've encountered a monster!" << endl;
+        
     }
     if(rand()%10 == 5)
     {
         cout << "You found a key!" << endl;
+        keys_++;
     }
     if(rand()%100 >= 1 || rand()%100 < 40)
     {
@@ -247,16 +239,14 @@ void Game::investigate()
 
 string Game::getMonsterName()
 {
+    
     int x = rand() % 4;
     string name = monsters_.at(x).getName();
     monsters_.erase(monsters_.begin()+x);
     return name;
 }
 
-// What is still needed from Monster fight:
-// 1. A player must be captured if they lost or surrendured
-// 2. Rewards must be given if the players win
-// 3. 50% chance every player loses energy 
+
 void Game::monsterFight(Group &G)
 {
     int choice;
@@ -264,9 +254,13 @@ void Game::monsterFight(Group &G)
     string y = getMonsterName();
     cout << y << " AHEAD! THEY LOOK HOSTILE!" << endl;
 
+    // If the number of weapons in inventory is greater than 1
+    if(G.getNumWeapons() == 0)
+    {
+        cout << "Sorry, you need at least one weapon to pick a fight with a monster" << endl;
 
-
-    // If the number of weapons in inbentory is greater than 1
+        return;
+    }
 
     cout << "1. Fight" << endl;
     cout << "2. Surrender" << endl;
@@ -289,7 +283,7 @@ void Game::monsterFight(Group &G)
     int a = G.getArmor2();
     //Calculation for variable C
     int c = 1; // for now (Based on rooms cleared)
-    //Calculation for variable r1
+    //Calculation for variables r
     int r1 = rand()%6 + 1;
     int r2 = rand()%6 + 1;
 
@@ -298,7 +292,7 @@ void Game::monsterFight(Group &G)
 
        
         if
-        (((r1 * w + d) - ((r2*c)/(1))) > 0)
+        (((r1 * w + d) - ((r2*c)/(c))) > 0)
         {
             cout << "You have won the battle!" << endl;
             merchant_.addGold(10*c);
