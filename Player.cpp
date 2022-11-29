@@ -104,3 +104,11 @@ void Player::invest()
     }
 }
 
+void Player::door()
+{
+    if(rand()%5 == 2)
+    {
+        fullness_ = fullness_ - 1;
+    }
+}
+
