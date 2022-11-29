@@ -374,7 +374,10 @@ void Merchant::setCookware()
                 break;
             }
         }
-        
+        case 4:
+        {
+            return;
+        }
     }
     default:
         cout << endl;
@@ -838,10 +841,10 @@ void Merchant::setWeapons(Group &G)
              << "+-------------+" << endl
              << "| Gold        | " << gold_ << endl
              << "| Ingredients | " << ingredients_ << " kg" << endl
-             << "| Cookware    | P: " << ceramic_pot_ << " |  F: " << frying_pan_ << "| C: " << cauldron_ << endl
-             << "| Weapons     | C: " << club_ << " | S: " << spear_ << " | R: " << rapier_ << " | A: " << axe_ << " | SW: " << sword_ << endl
+             << "| Cookware    | Pots: " << ceramic_pot_ << " |  Frying Pans: " << frying_pan_ << "| Cauldrons: " << cauldron_ << endl
+             << "| Weapons     | Clubs: " << club_ << " | Spears: " << spear_ << " | Rapiers: " << rapier_ << " | Axes: " << axe_ << " | Swords: " << sword_ << endl
              << "| Armor       | " << armor_ << endl
-             << "| Treasures   | S: " << silver_ << " | R: " << ruby_ << " | E: " << emerald_ << " | D: " << diamond_ << " | G: " << gem_ << endl;
+             << "| Treasures   | Silver: " << silver_ << " | Ruby: " << ruby_ << " | Emerald: " << emerald_ << " | Diamond: " << diamond_ << " | Ggem: " << gem_ << endl;
     }
     void Merchant::breakCeramic(int Ceramic)
     {
