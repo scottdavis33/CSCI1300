@@ -45,6 +45,8 @@ private:
 
     string answer_;
 
+    int keys_;
+
     int monsterIndex_;
 
     // Merchant merchant_;
@@ -67,15 +69,15 @@ public:
 
     int NPCCount();
 
-    void move(char, Map& );
+    void move(char, Map&);
 
     void printActionMenu();
 
-    void investigate();
+    void investigate(Group&);
 
     void monsterFight(Group&);
 
-    void NPCEncounter(Map&);
+    void NPCEncounter(Group&, Map&);
 
     void printRandomRiddle();
 
@@ -86,7 +88,6 @@ public:
     string getMonsterName();
 
     Merchant merchant_;
-
 
     // Merchant getMerchant(Merchant);
 
