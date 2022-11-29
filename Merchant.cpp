@@ -374,6 +374,7 @@ void Merchant::setCookware()
                 break;
             }
         }
+        
     }
     default:
         cout << endl;
@@ -454,6 +455,7 @@ void Merchant::setWeapons(Group &G)
                                     }
                                 }
                             }
+                            weapons_++;
 
                             gold_ = gold_ - (howmany1 * 2);
                             club_ = club_ + howmany1;
@@ -497,7 +499,7 @@ void Merchant::setWeapons(Group &G)
                         }
                         else if(club_ + sword_ + rapier_ + spear_ + axe_ + howmany1 > 5 )
                         {
-                            cout << "You don't have enough inventory space to buy this many more weapons" << endl;
+                            cout << "You don't have enough inventory space to buy that many more weapons" << endl;
                         }
                         else
                         {
@@ -513,7 +515,7 @@ void Merchant::setWeapons(Group &G)
                                     }
                                 }
                             }
-
+                                weapons_++;
                                 gold_ = gold_ - (howmany1 * 2);
                                 spear_ = howmany1 + spear_;
                                 cout << "Thank you for your patronage! What else can I get for you?" << endl;
@@ -571,6 +573,7 @@ void Merchant::setWeapons(Group &G)
                                     }
                                 }
                             }
+                                weapons_++;
 
                                 gold_ = gold_ - (howmany1 * 5);
                                 rapier_ = howmany1 + rapier_;
@@ -629,6 +632,7 @@ void Merchant::setWeapons(Group &G)
                                     }
                                 }
                             }
+                            weapons_++;
 
                             gold_ = gold_ - (howmany1 * 15);
                             axe_ = howmany1 + axe_;
@@ -687,6 +691,7 @@ void Merchant::setWeapons(Group &G)
                                     }
                                 }
                             }
+                            
 
                             gold_ = gold_ - (howmany1 * 50);
                             sword_ = howmany1 + sword_;
@@ -701,6 +706,11 @@ void Merchant::setWeapons(Group &G)
                     break;
                 }
             }
+        }
+        case 6:
+        {
+            cout << "Goodbye." << endl;
+            break;
         }
         default:
             cout << endl;
@@ -906,4 +916,78 @@ void Merchant::setWeapons(Group &G)
     int Merchant::getGold()
     {
         return gold_;
+    }
+
+    void Merchant::addSilver()
+    {
+        silver_++;
+    }
+    void Merchant::addRuby()
+    {
+        ruby_++;
+    }
+    void Merchant::addEmerald()
+    {
+        emerald_++;
+    }
+    void Merchant::addDiamond_()
+    {
+        diamond_++;
+    }
+    void Merchant::addGem()
+    {
+        gem_++;
+    }
+    void Merchant::addGold()
+    {
+        gold_++;
+    }
+    void Merchant::misfortune()
+    {
+        int Robbed = rand()&10;
+        int Breaks = rand()&10;
+        if(Robbed < 3)
+        {
+            if(Robbed == 0)
+            {
+                if(ceramic_pot_ <= 0)
+                {
+                    armor_ --;
+                }
+                ceramic_pot_ --;
+            }
+            else if(Robbed == 1)
+            {
+                if(frying_pan_ <= 0)
+                {
+                    armor_--;
+                }
+                frying_pan_--;
+            }
+            else if(Robbed == 2)
+            {
+                if(cauldron_ <= 0)
+                {
+                    armor_--;
+                }
+                cauldron_--;
+            }
+            ingredients_-=10;
+        }
+        
+        else if(Breaks == 1)
+        {
+
+        }
+    }
+    void Merchant::InventoryMenu()
+    {
+        cout << "Choose one of the following:" << endl
+        << "1. Cookware: You will need something to cook those ingredients." << endl
+        << "2. Ingredients: To make food, you have to cook raw ingredients." << endl
+        << "3. Weapons: It's dangerous to go alone, take this!" << endl
+        << "4. Armor: If you want to survive monster attacks, you will need some armor." << endl
+        << "5. Sell treasures: If you find anything shiny, I would be happy to take it off your hands." << endl
+        << "6. Leave: Make sure you get everything you need. I'm leaving after this sale!" << endl;
+       
     }
