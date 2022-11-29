@@ -144,7 +144,7 @@ void Game::printRandomRiddle()
 
 }
 
-void Game::NPCEncounter(Map &map)
+void Game::NPCEncounter(Group &G, Map &map)
 {
     int choice;
 
@@ -160,8 +160,11 @@ void Game::NPCEncounter(Map &map)
         char choice1;
         cout << "What direction would you like to move in? (wasd)" << endl;
         cin >> choice1;
-
         move(choice1, map);
+        if(map.isNPCLocation(map.getPlayerRow(), map.getPlayerCol()) == true)
+        {
+            NPCEncounter(G, map);
+        }
     }
     else if(choice == 2)
     {
@@ -179,7 +182,54 @@ void Game::NPCEncounter(Map &map)
 
         if(answer == answer_)
         {
+            char answer;
             cout << "You got the right answer!" << endl;
+            cout << "Would you like to buy some items from me? (y/n)" << endl;
+            cin >> answer;
+            
+            int choice20 = 0;
+            merchant_.InventoryMenu();
+            cin >> choice20;
+                switch(choice20)
+                {
+                    case 1:
+                    {
+                        merchant_.setCookware();
+                        merchant_.displayMenu();
+                        break;
+                    }
+                    case 2:
+                    {
+                        merchant_.setIngredients();
+                        merchant_.displayMenu();
+                        break;
+                    }
+                    case 3:
+                    {
+                        merchant_.setWeapons(G);
+                        merchant_.displayMenu();
+                        break;
+                    }
+                    case 4:
+                    {
+                        merchant_.setArmor(G);
+                        merchant_.displayMenu();
+                        break;
+                    }
+                    case 5:
+                    {
+                        merchant_.setsTreasures();
+                        merchant_.displayMenu();
+                        break;
+                    }
+                    default:
+                    cout << "Enjoy your journey team!" << endl;
+                    break;
+                }
+        }
+        else 
+        {
+            monsterFight(G);    
         }
     }
 }
@@ -192,10 +242,6 @@ void Game::move(char c, Map &m)
         group_.groupmove();
         m.move(c);
 
-        if(m.isNPCLocation(m.getPlayerRow(), m.getPlayerCol()) == true)
-        {
-            NPCEncounter(m);
-        }
         m.displayMap();
     } 
     else
@@ -214,22 +260,24 @@ void Game::move(char c, Map &m)
 //     // return monsters_.at(x);
 // }
 
-void Game::investigate()
+void Game::investigate(Group &G)
 {
     
     if(rand()%2 == 1)
     {
-        player_.setFullness(player_.getFullness() - 1);
+        G.groupInvest();
     }
     if(rand()%5 == 2)
     {
         cout << "You found hidden treasure!" << endl;
-        
+        // if(roomsCleared_ = 1)
+        merchant_.addSilver();
+        cout << "+1 silver" << endl;
     }
     if(rand()%10 == 5)
     {
         cout << "You found a key!" << endl;
-        keys_++;
+        G.addKey();
     }
     if(rand()%100 >= 1 || rand()%100 < 40)
     {
@@ -295,13 +343,16 @@ void Game::monsterFight(Group &G)
         (((r1 * w + d) - ((r2*c)/(c))) > 0)
         {
             cout << "You have won the battle!" << endl;
+            cout << "You've earned " << 10*c << " gold!" << endl;
+            cout << "You've earned " << 5*c << " ingredients!" << endl;
             merchant_.addGold(10*c);
             merchant_.addIngrediants(5 * c);
             if(rand()%10 == 2)
             {
-                keys_++;
+                cout << "The monster was hiding a key!" << endl;
+                G.addKey();
             }
-
+            
         }
         else
         {
@@ -319,13 +370,15 @@ void Game::monsterFight(Group &G)
                     if(rand() % 10 == 3)
                     {
                         cout << "You'll forever be scarred from watching the monster dismember " << G.getPlayerAt(i).getName() << " limb for limb." << endl;
+                        G.killPlayerAt(i);
                     }
                 }
                 else if (G.getPlayerAt(i).checkArmor() == true)
                 {
                     if(rand() % 20 == 4)
                     {
-                        cout << "In order to save yourself, you pushed " << G.getPlayerAt(i).getName() << " out of your way and the monster killed them :(" << endl;
+                        cout << "In order to save yourself, you pushed " << G.getPlayerAt(i).getName() << " out of your way, the monster laughed as you watched them devour your old friend" << endl;
+                        G.killPlayerAt(i);
                     }
                 }
             }
@@ -374,6 +427,7 @@ void Game::monsterFight(Group &G)
         cout << "You lost the battle" << endl; // one random player is captured
         int a = rand()%4 + 1;
         cout << G.getPlayerAt(a).getName() << " called the monster a homophobic slur, resulting in him getting his face repeatedly bashed against the dungeon wall" << endl;
+        G.killPlayerAt(a);
     }
     else
     {
