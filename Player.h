@@ -46,6 +46,7 @@ public:
     void setArmor(bool);
     bool checkArmor();
     void invest();
+    void door();
 
 };
 #endif
