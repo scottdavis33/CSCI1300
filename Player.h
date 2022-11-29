@@ -43,8 +43,9 @@ public:
     void setWeapon(int);
     // for moving each individual player
     void movement();
-    void setArmor();
+    void setArmor(bool);
     bool checkArmor();
+    void invest();
 
 };
 #endif
