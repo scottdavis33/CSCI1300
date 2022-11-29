@@ -43,6 +43,9 @@ int split(string input_string, char separator, string arr[], int arr_size)
 
 Game::Game()
 {
+
+doorsCleared_ = 0;
+
 //Fills a vector with all of the monsters
 {
     ifstream fin;
@@ -165,6 +168,16 @@ void Game::NPCEncounter(Group &G, Map &map)
         {
             NPCEncounter(G, map);
         }
+        if(map.isRoomLocation(map.getPlayerRow(), map.getPlayerCol()) == true)
+        {
+            G.groupDoor();
+
+            if(G.getKeys() <= 0)
+            {
+                doorPuzzle(G, map);
+            }
+        }
+
     }
     else if(choice == 2)
     {
@@ -186,8 +199,9 @@ void Game::NPCEncounter(Group &G, Map &map)
             cout << "You got the right answer!" << endl;
             cout << "Would you like to buy some items from me? (y/n)" << endl;
             cin >> answer;
-            
             int choice20 = 0;
+            do{
+            
             merchant_.InventoryMenu();
             cin >> choice20;
                 switch(choice20)
@@ -226,11 +240,14 @@ void Game::NPCEncounter(Group &G, Map &map)
                     cout << "Enjoy your journey team!" << endl;
                     break;
                 }
+            }while(choice20 != 6);
         }
         else 
         {
-            monsterFight(G);    
+            monsterFight(G, map);    
         }
+
+        map.removeNPC(map.getPlayerRow(), map.getPlayerCol());
     }
 }
 
@@ -241,8 +258,8 @@ void Game::move(char c, Map &m)
     {
         group_.groupmove();
         m.move(c);
-
         m.displayMap();
+        
     } 
     else
     {
@@ -287,15 +304,63 @@ void Game::investigate(Group &G)
 
 string Game::getMonsterName()
 {
-    
-    int x = rand() % 4;
-    string name = monsters_.at(x).getName();
-    monsters_.erase(monsters_.begin()+x);
-    return name;
+    int x = 0;
+    string name;
+    if(doorsCleared_ == 0)
+    {
+        x = rand() % 4;
+        name = monsters_.at(x).getName();
+        monsters_.erase(monsters_.begin()+x);
+        return name;
+    }
+    else if(doorsCleared_ == 1)
+    {
+        x = rand()%4 + 4;
+        name = monsters_.at(x).getName();
+        monsters_.erase(monsters_.begin()+x);
+        return name;
+    }
+    else if(doorsCleared_ == 2)
+    {
+        x = rand()%4 + 8;
+        name = monsters_.at(x).getName();
+        monsters_.erase(monsters_.begin()+x);
+        return name;
+    }
+    else if(doorsCleared_ == 3)
+    {
+        x = rand()%4 + 12;
+        name = monsters_.at(x).getName();
+        monsters_.erase(monsters_.begin()+x);
+        return name;      
+    }
+    else if(doorsCleared_ == 4)
+    {
+        x = rand()%4 + 16;
+        name = monsters_.at(x).getName();
+        monsters_.erase(monsters_.begin()+x);
+        return name;      
+    }
+    return "bossTime";
+}
+void Game::roomFight()
+{
+    if(doorsCleared_ == 4)
+    {
+        doorsCleared_ = doorsCleared_ +1;
+        getMonsterName();
+        doorsCleared_ = doorsCleared_ - 1;
+    }
+    else if(doorsCleared_ != 4)
+    {   
+        doorsCleared_ = doorsCleared_ + 2;
+        getMonsterName();
+        doorsCleared_ = doorsCleared_ - 2;
+    }
 }
 
 
-void Game::monsterFight(Group &G)
+void Game::monsterFight(Group &G, Map &map)
 {
     int choice;
     int d = 0;
@@ -337,8 +402,14 @@ void Game::monsterFight(Group &G)
 
     if(choice == 1)
     {
-
-       
+        if(inARoom == true)
+        {
+            cout << "You cleared the room successfully!" << endl;
+            map.removeRoom(map.getPlayerRow(), map.getPlayerCol());
+            doorsCleared_++;
+            inARoom = false;
+        }
+        
         if
         (((r1 * w + d) - ((r2*c)/(c))) > 0)
         {
@@ -352,7 +423,6 @@ void Game::monsterFight(Group &G)
                 cout << "The monster was hiding a key!" << endl;
                 G.addKey();
             }
-            
         }
         else
         {
@@ -363,7 +433,7 @@ void Game::monsterFight(Group &G)
 
             cout << "The monster took " << (merchant_.getGold() /4) << " gold from the group!" << endl;
 
-            for(int i = 0; i < G.numPlayers(); i++)
+            for(int i = 1; i < G.numPlayers(); i++)
             {
                 if(G.getPlayerAt(i).checkArmor() == false)
                 {
@@ -538,3 +608,82 @@ void Game::printActionMenu()
         cout << "5. Give up" << endl;
 }
 
+void Game::doorPuzzle(Group &G, Map &map
+
+)
+{
+    int boulder = 0;
+    int parchment = 1;
+    int shears = 2;
+    int counter = 0;
+    bool winner = false;
+
+    int play = 0;
+
+    int doorPlay = rand()%3;
+
+    if(G.getKeys() == 0)
+    {
+        cout << "You don't have any keys... Get ready for some Boulder Parchment Shears!" << endl;
+
+        do{
+            if(counter != 0)
+            {
+                cout << "Tie game! Play another round." << endl;
+            }
+            cout << "Enter your throw: (1: Boulder | 2: Parchment | 3: Shears)" << endl;
+            cin >> play;
+
+            if(play == 0 && doorPlay == 2)
+            {
+                cout << "The door played shears, you win!" << endl;
+                winner = true;
+                inARoom = true;
+                monsterFight(G, map);
+                return;
+            }
+            else if(play == 0 && doorPlay == 1)
+            {
+                cout << "The door played parchment, you lose!" << endl;
+                monsterFight(G, map);
+                return;
+            }
+            else if(play == 1 && doorPlay == 0)
+            {
+                cout << "The door played shears, you win!" << endl;
+                winner = true;
+                inARoom = true;
+                monsterFight(G, map);
+                return;
+            }
+            else if(play == 1 && doorPlay == 2)
+            {
+                cout << "The door played shears, you lose!" << endl;
+                
+                monsterFight(G, map);
+                
+                return;
+            }
+            else if(play == 2 && doorPlay == 1)
+            {
+                winner = true;
+                cout << "The door played shears, you win!" << endl;
+                inARoom = true;
+                monsterFight(G, map);
+                return;
+            } 
+            else if(play == 2 && doorPlay == 0)
+            {
+                cout << "The door played boulder, you lose!" << endl;
+                monsterFight(G, map);
+                return;
+            }
+        counter++;
+        }while((doorPlay != play || counter != 2));
+
+        if(counter == 2)
+        {
+            cout << "You're three attempts are up!" << endl;
+        }
+    }
+}
