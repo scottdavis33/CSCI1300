@@ -19,6 +19,7 @@ Psedocode Group
 class Group
 {
     public:
+        Group();
         void groupmove();
         void life(Map);
          //getters
@@ -34,6 +35,11 @@ class Group
          int getArmor2();
          void setArmorAt(int);
          int numPlayers();
+         void addKey();
+         int getKeys();
+         void groupInvest();
+        void killPlayerAt(int);
+         
         
          
     private:
@@ -42,5 +48,6 @@ class Group
         int bonus_;
         int numWeapons_;
         int armor_;
+        int keys_;
 };
 #endif
