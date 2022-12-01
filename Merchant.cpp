@@ -1,7 +1,7 @@
 // CSCI 1300 Fall 2022
-// Author: Jared Preyer
-// Recitation: 105 - Reagan Rychecky
-// Project 3 - Class 1
+// Author: Jared Preyer && Scott Davis 
+// Recitation: 105 - Reagan Rychecky && 308 - Baljot Kaur
+// Project 3 - Merchant Class
 #include <iostream>
 #include <cstdlib>
 #include "Merchant.h"
@@ -43,10 +43,7 @@ int Merchant::getWeapons()
 {
     return club_ + spear_ + rapier_ + axe_ + sword_;
 }
-// int Merchant::getCeramicPot()
-// {
-//     return ceramic_pot_;
-// }
+
 int Merchant::getCookware()
 {
     // cout <<  "cer pot M" << ceramic_pot_ << endl;
@@ -146,10 +143,7 @@ void Merchant::setArmor(Group &G)
         break;
     }
 }
-// int Merchant::setCeramicPot(int Ceramic_Pot);
-// {
-//     ceramic_pot_ = Cerma
-// }
+
 /*
 Pseudocode Merchant setIngredients
 1. Prompt user for how many kg they wish to purchase
@@ -271,24 +265,7 @@ void Merchant::setCookware()
                     }
                     return;
                 }
-                // int random1 = rand()%3;
-                // if(random1 == 0)
-                // {
-                //     ceramic_pot_ = "Pot Broken:";
-                //     ceramic_pot_ --; // decrement items that is broken
-                // }
-                // else if(random1 == 1)
-                // {
-                //     ceramic_pot_ = "Cermic Pot is good:";
-                //     ingredients_ = ingredients_ + ceramic_pot_; // Comment need to add ingredients into the pot
-
-                // }
-                // else if(random1 == 2)
-                // {
-                //     ceramic_pot_ = "Cermic Pot is gucci:";
-                //     ceramic_pot_ = ceramic_pot_ + ingredients_;
-                //     // comment need to add ingredients into the pot
-                // }
+              
             }
             else
             {
@@ -724,7 +701,14 @@ void Merchant::setWeapons(Group &G)
         while (choice != 6)
             ;
     }
-
+    /*
+    Pseudocode setTreasure
+    1. Declare Variables
+    2. Prompt User with options
+    3. Each case will check if they have enough of the respected inventory
+    4. User math to add or subtract the proper inventory that needs to be done
+    5. Since gold and all of these treasures are inside private variables it will be added or subtracted in the correct way.
+    */
     void Merchant::setsTreasures()
     {
         int select = 0;
@@ -846,30 +830,41 @@ void Merchant::setWeapons(Group &G)
              << "| Armor       | " << armor_ << endl
              << "| Treasures   | Silver: " << silver_ << " | Ruby: " << ruby_ << " | Emerald: " << emerald_ << " | Diamond: " << diamond_ << " | Ggem: " << gem_ << endl;
     }
+    /*
+    Pseudocode breakCeramic
+    1. This is setting the ingredients to be subtracted buy the ceramic pot count.
+    2. Decrement the pot itself from the inventory
+    */
     void Merchant::breakCeramic(int Ceramic)
     {
-        // Ceramic  = Ceramic * 5; // Taking the responsibilites of the input from cook and eat
-
-        // ingredients_ = Ceramic;
-        // cout << ingredients_ << endl;
         ingredients_ = ingredients_ - Ceramic;
-        // cout << ingredients_ << endl;
-        // cout << ceramic_pot_ << endl;
         ceramic_pot_--; // One cook for pot
-        // cout << ceramic_pot_ << endl;
     }
+    /*
+    Pseudocode breakFrying
+    1. Set ingredients to the parameter integer and subtract the integer from ingredients
+    2. Decrement the pot itself from the inventory
+    */
     void Merchant::breakFrying(int Fry)
     {
         ingredients_ = ingredients_ - Fry;
         frying_pan_--;
     }
+    /*
+     Pseudocode breakCauldron
+    1. Set ingredients to the parameter integer and subtract the integer from ingredients
+    2. Decrement the pot itself from the inventory
+    */
     void Merchant::breakCauldron(int Cauld)
     {
 
         ingredients_ = ingredients_ - Cauld;
         cauldron_--;
     }
-
+    /*
+    Pseudocode for weapon getters
+    1. Return each respected weapon
+    */
     int Merchant::getSpear()
     {
         return spear_;
@@ -892,7 +887,10 @@ void Merchant::setWeapons(Group &G)
     {
         return sword_;
     }
-
+    /*
+     Pseudocode Add gold
+    1. Set ingredients to the parameter integer and add the integer from ingredients
+    */
     void Merchant::addGold(int x)
     {
         gold_ = gold_ + x;
