@@ -724,7 +724,13 @@ void Merchant::setWeapons(Group &G)
         while (choice != 6);
     }
 
-    void Merchant::setsTreasures()
+    // 1. name is misleading, function refers to selling treasure
+// 2. conditonal assures player has treasures to sell
+// 3. for each case in the switch statement:
+// 4. asks for input for how many player wishes to sell
+// 5. adds respective gold for how much they choose to sell
+// 6. deincrements amount of treasures player chooses to sell
+   void Merchant::setsTreasures()
     {
         int select = 0;
         int silver = 0;
@@ -743,7 +749,7 @@ void Merchant::setWeapons(Group &G)
 
         if(silver_ >= 1 || ruby_ >= 1 || emerald_ >= 1 || diamond_ >= 1 || gem_ >= 1)
         {
-        `   switch (select)
+           switch (select)
             {
                 case 1:
                 {
@@ -852,58 +858,77 @@ void Merchant::setWeapons(Group &G)
              << "| Armor       | " << armor_ << endl
              << "| Treasures   | Silver: " << silver_ << " | Ruby: " << ruby_ << " | Emerald: " << emerald_ << " | Diamond: " << diamond_ << " | Ggem: " << gem_ << endl;
     }
+    // deincrements ceramic pot and ingredients respectivly
+    // assures ingredeints will never be 0
     void Merchant::breakCeramic(int Ceramic)
     {
         // Ceramic  = Ceramic * 5; // Taking the responsibilites of the input from cook and eat
 
         // ingredients_ = Ceramic;
         // cout << ingredients_ << endl;
-        ingredients_ = ingredients_ - Ceramic;
+        if(ingredients_ >= Ceramic)
+        {
+            ingredients_ = ingredients_ - Ceramic;
+        }
+        
         // cout << ingredients_ << endl;
         // cout << ceramic_pot_ << endl;
         ceramic_pot_--; // One cook for pot
         // cout << ceramic_pot_ << endl;
     }
+    //deincrements frying pan and respective ingredients
+    // conditional makes sure ingredients is never 0
     void Merchant::breakFrying(int Fry)
     {
-        ingredients_ = ingredients_ - Fry;
+        if(ingredients_ >= Fry)
+        {
+            ingredients_ = ingredients_ - Fry;
+        }
         frying_pan_--;
     }
+// breaks the cauldron and deincrements ingredients because event occurs when cooking
+// conditional makes sure ingredients will never be negetive
     void Merchant::breakCauldron(int Cauld)
     {
-
-        ingredients_ = ingredients_ - Cauld;
+        if(ingredients_ >= Cauld)
+        {
+            ingredients_ = ingredients_ - Cauld;
+        }
         cauldron_--;
-    }
 
+    }
+//returns speae
     int Merchant::getSpear()
     {
         return spear_;
     }
-
+//returns axe
     int Merchant::getAxe()
     {
         return axe_;
     }
-
+//returns club
     int Merchant::getClub()
     {
         return club_;
     }
+    //returns rapier
     int Merchant::getRapier()
     {
         return rapier_;
     }
+    //returns sword
     int Merchant::getSword()
     {
         return sword_;
     }
-
+// increments gold based on input
     void Merchant::addGold(int x)
     {
         gold_ = gold_ + x;
     }
-
+    // adds ingredients based on paramter
+    //also serves to deincrement ingredients if parameter is negetive, conditinoal makes sure ingredients will not be negetive
     void Merchant::addIngrediants(int x)
     {
         if(ingredients_ + x < 0)
@@ -916,42 +941,47 @@ void Merchant::setWeapons(Group &G)
         }
         
     }
-
+// deincrements gold
     void Merchant::subGold(int x) 
     {
         gold_ = gold_ - x;
     }
-
+// returns gold
     int Merchant::getGold()
     {
         return gold_;
     }
-
+// increments silver
     void Merchant::addSilver()
     {
         silver_++;
     }
+    //increments ruby
     void Merchant::addRuby()
     {
         ruby_++;
     }
+    //increments emerald
     void Merchant::addEmerald()
     {
         emerald_++;
     }
+    //increments diamond
     void Merchant::addDiamond_()
     {
         diamond_++;
     }
+    //increments gem
     void Merchant::addGem()
     {
         gem_++;
     }
+    //increments gold
     void Merchant::addGold()
     {
         gold_++;
     }
-
+// prints the merchants shopping menu
     void Merchant::InventoryMenu()
     {
         cout << "Choose one of the following:" << endl
@@ -963,7 +993,14 @@ void Merchant::setWeapons(Group &G)
         << "6. Leave: Make sure you get everything you need. I'm leaving after this sale!" << endl;
        
     }
-
+/*
+1. Informs the player that an unfortunate event has happened
+2. Two variables are assigned numbers 0-9
+3. if the robbed variables is 0, 1, or 2 the they will lose either armor, a pot, a frying pan, or a cauldron
+4. if the player is supposed to lose a cauldron for example, but they don't have one to lose they will lose an armor instead
+5. the same logic applies to items breaking but it is only if the random integer is one or two
+6. unless the player has less than 10 ingredients, they will always lose 10 as well when a misforune occurs
+*/
     void Merchant::misfortune()
     {
         cout << "Today isn't going your way..." << endl;
@@ -1010,7 +1047,11 @@ void Merchant::setWeapons(Group &G)
                     cout << "They robbed your cauldron!" << endl;
                 }
             }
-            ingredients_-=10;
+            if(ingredients_ >= 10)
+            {
+                ingredients_-=10;
+            }
+            
         }
         
             else if(Breaks == 1)
@@ -1037,6 +1078,10 @@ void Merchant::setWeapons(Group &G)
                     cout << "Your cauldron broke!" << endl;
                 }
             }
-            cout << "-10 Ingredients" << endl;
-            ingredients_-=10;
+            if(ingredients_ >= 10)
+            {
+                cout << "-10 Ingredients" << endl;
+                ingredients_-=10;
+            }
+
     }
