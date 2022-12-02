@@ -577,14 +577,18 @@ void Game::CookandEat(Group &G)
                         cout << "You boke your ceramic!" << endl;
                         merchant_.breakCeramic(Ceramic);
                     }
+                    else
+                    {
+                        for(int i = 0; i < Ceramic; i++)
+                        {
+                            G.groupEat();
+                        }
+                    }
 
                 }
                 else
                 {
-                    for(int i = 0; i < Ceramic; i++)
-                    {
-                        G.groupEat();
-                    }
+                    cout << "Invalid input" << endl;
                     return;
                 }
                 break;
@@ -605,15 +609,19 @@ void Game::CookandEat(Group &G)
                         cout << "You boke your frying pan!" << endl;
                         merchant_.breakFrying(Frying);
                     }
+                    else
+                    {
+                        for(int i = 0; i < Frying; i++)
+                        {
+                            G.groupEat();
+                        }
+                    }
 
                 }
                 else
                 {
-                    for(int i = 0; i < Frying; i++)
-                    {
-                        G.groupEat();
-                    }
-                    return;
+                    cout << "Invalid input" << endl;
+                    return; 
                 }
                 
             }
@@ -631,13 +639,17 @@ void Game::CookandEat(Group &G)
                         cout << "You boke your cauldron!" << endl;
                         merchant_.breakCauldron(Cauldron);
                     }
+                    else
+                    {
+                       for(int i = 0; i < Cauldron; i++)
+                        {
+                            G.groupEat();
+                        }
+                    }
                 }
                 else
                 {
-                    for(int i = 0; i < Cauldron; i++)
-                    {
-                        G.groupEat();
-                    }
+                    cout << "invalid input" << endl;
                     return;
                 }
             }
