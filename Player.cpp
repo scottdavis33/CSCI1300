@@ -112,3 +112,8 @@ void Player::door()
     }
 }
 
+void Player:: addFullness()
+{
+    fullness_++;
+}
+
