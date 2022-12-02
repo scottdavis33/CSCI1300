@@ -177,7 +177,6 @@ void Game::NPCEncounter(Group &G, Map &map)
                 doorPuzzle(G, map);
             }
         }
-
     }
     else if(choice == 2)
     {
@@ -197,8 +196,8 @@ void Game::NPCEncounter(Group &G, Map &map)
         {
             char answer;
             cout << "You got the right answer!" << endl;
-            cout << "Would you like to buy some items from me? (y/n)" << endl;
-            cin >> answer;
+            cout << "Looks like you're worth selling to" << endl;
+
             int choice20 = 0;
             do{
             
@@ -287,9 +286,39 @@ void Game::investigate(Group &G)
     if(rand()%5 == 2)
     {
         cout << "You found hidden treasure!" << endl;
-        // if(roomsCleared_ = 1)
-        merchant_.addSilver();
-        cout << "+1 silver" << endl;
+        if(doorsCleared_ == 1)
+        {
+            merchant_.addSilver();
+            cout << "+1 silver" << endl;
+        }
+        else if(doorsCleared_ == 2)
+        {
+            merchant_.addRuby();
+            cout << "+1 Ruby" << endl;
+        }
+        else if(doorsCleared_ == 3)
+        {
+            merchant_.addEmerald();
+            cout << "+1 Emerald" << endl;
+        }
+        else if(doorsCleared_ == 4)
+        {
+            merchant_.addDiamond_();
+            cout << +"+1 Diamond" << endl;
+        }
+        else if(doorsCleared_ ==  5)
+        {
+            cout << "+2 Diamond" << endl;
+            cout << "+3 Emerald" << endl;
+
+            merchant_.addDiamond_();
+            merchant_.addDiamond_();
+
+            merchant_.addEmerald();
+            merchant_.addEmerald();
+            merchant_.addEmerald();
+        }
+        
     }
     if(rand()%10 == 5)
     {
@@ -298,7 +327,7 @@ void Game::investigate(Group &G)
     }
     if(rand()%100 >= 1 || rand()%100 < 40)
     {
-        cout << "Misfortune" << endl;
+        merchant_.misfortune();
     }
 }
 
@@ -378,6 +407,15 @@ void Game::monsterFight(Group &G, Map &map)
     cout << "1. Fight" << endl;
     cout << "2. Surrender" << endl;
     cin >> choice;
+    
+
+    while(!(choice == 1 || choice == 2))
+    {
+        cout <<"Invalid input" << endl;
+        return;
+    }
+
+
 
     // calculations for variable d
     if
@@ -402,6 +440,11 @@ void Game::monsterFight(Group &G, Map &map)
 
     if(choice == 1)
     {
+        
+        if
+        (((r1 * w + d) - ((r2*c)/(c))) > 0)
+        {
+            cout << "You have won the battle!" << endl;
         if(inARoom == true)
         {
             cout << "You cleared the room successfully!" << endl;
@@ -409,11 +452,6 @@ void Game::monsterFight(Group &G, Map &map)
             doorsCleared_++;
             inARoom = false;
         }
-        
-        if
-        (((r1 * w + d) - ((r2*c)/(c))) > 0)
-        {
-            cout << "You have won the battle!" << endl;
             cout << "You've earned " << 10*c << " gold!" << endl;
             cout << "You've earned " << 5*c << " ingredients!" << endl;
             merchant_.addGold(10*c);
@@ -491,6 +529,12 @@ void Game::monsterFight(Group &G, Map &map)
             }
 
         }
+        int q = rand()%10;
+
+        if(q >= 0 && q < 4)
+        {
+            merchant_.misfortune();
+        }
     }
     else if(choice == 2)
     {
@@ -499,12 +543,9 @@ void Game::monsterFight(Group &G, Map &map)
         cout << G.getPlayerAt(a).getName() << " called the monster a homophobic slur, resulting in him getting his face repeatedly bashed against the dungeon wall" << endl;
         G.killPlayerAt(a);
     }
-    else
-    {
-        cout << "Invalid input" << endl;
-    }
+
 }
-void Game::CookandEat()
+void Game::CookandEat(Group &G)
 {
         // Needs to add the cookware increase in fullness if completed successfully
         int Ceramic = 0; // This function only
@@ -523,24 +564,27 @@ void Game::CookandEat()
         {
             case 1:
             {
-                cout << "How many of kilograms of ingredients would you like to use with a 5(kg):1(ingredient) ratio ? " << endl;
+                cout << "How many of kilograms of ingredients would you like to use with a 5(kg):1(fullness) ratio ? " << endl;
                 cin >> Ceramic;
                 
                 // Need to add the 5:1 Ratio check
+
                 if(Ceramic%5 == 0)
                 {
-                    // int random1 = rand()%4;
                     int random1 = rand()%4;
                     if(random1 == 0)
                     {
+                        cout << "You boke your ceramic!" << endl;
                         merchant_.breakCeramic(Ceramic);
                     }
 
                 }
                 else
                 {
-                    
-                    // Needs to add the cookware increase in fullness if completed successfully
+                    for(int i = 0; i < Ceramic; i++)
+                    {
+                        G.groupEat();
+                    }
                     return;
                 }
                 break;
@@ -549,40 +593,51 @@ void Game::CookandEat()
             }
             case 2:
             {
-                cout << "How many of kilograms of ingredients would you like to use with a 5(kg):1(ingredient) ratio ? " << endl;
+                cout << "How many of kilograms of ingredients would you like to use with a 5(kg):1(fullness) ratio ? " << endl;
                 cin >> Frying;
 
-                // Need to add the 5:1 Ratio check with fullness
-                if(Frying%5 == 0)
+
+                if(Ceramic%5 == 0)
                 {
-                    int random2 = rand()%10;
-                    if(random2 == 0)
+                    int random1 = rand()%4;
+                    if(random1 == 0)
                     {
+                        cout << "You boke your frying pan!" << endl;
                         merchant_.breakFrying(Frying);
                     }
+
                 }
-                else 
+                else
                 {
+                    for(int i = 0; i < Frying; i++)
+                    {
+                        G.groupEat();
+                    }
                     return;
                 }
                 
             }
             case 3:
             {
-                cout << "How many of kilograms of ingredients would you like to use with a 5(kg):1(ingredient) ratio ? " << endl;
+                cout << "How many of kilograms of ingredients would you like to use with a 5(kg):1(fullness) ratio ? " << endl;
                 cin >> Cauldron;
                 
                 
-                if(Cauldron%5 == 0)
+                if(Ceramic%5 == 0)
                 {
-                    int random3 = rand()%50;
-                    if(random3 == 0)
+                    int random1 = rand()%4;
+                    if(random1 == 0)
                     {
+                        cout << "You boke your cauldron!" << endl;
                         merchant_.breakCauldron(Cauldron);
                     }
                 }
                 else
                 {
+                    for(int i = 0; i < Cauldron; i++)
+                    {
+                        G.groupEat();
+                    }
                     return;
                 }
             }
@@ -686,4 +741,9 @@ void Game::doorPuzzle(Group &G, Map &map
             cout << "You're three attempts are up!" << endl;
         }
     }
+}
+
+int Game::getDoorsCleared()
+{
+    return doorsCleared_;
 }
