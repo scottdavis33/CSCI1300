@@ -13,7 +13,7 @@
 #include "Merchant.h"
 
 using namespace std;
-
+   
 int split(string input_string, char separator, string arr[], int arr_size)
 {
     //initilize variable for number of pieces the string is split into
@@ -44,7 +44,14 @@ int split(string input_string, char separator, string arr[], int arr_size)
     return ind + 1; // if index = 0 (never run into the seperator it'll return 1)
     
 }
-
+/*
+Pseudocode Game
+1. Declare variables
+2. Read file
+3. Use getline to read each line
+4. Declare a variable to get the amount of splits
+5. Use Monster object to push back on the vector
+*/
 Game::Game()
 {
 
@@ -114,7 +121,10 @@ int Game::NPCCount()
 {
     return NPCCount_;
 }
-
+/*
+Pseudocode printMonsters
+1. Use a for loop to get the name and the level of each monsters
+*/
 void Game::printMonsters()
 {
     for(int i = 0; i < 21; i++)
@@ -124,23 +134,37 @@ void Game::printMonsters()
 
     }
 }
-
+/*
+Pseudocdde setSorerer_anger
+set the private variable to the parameter integer
+*/
 void Game::setSorcerer_anger(int anger)
 {
     sorcerer_anger_ = anger;
 }
-
+/*
+Pseudocode getSorcerer
+1. Return the private variable
+*/
 int Game::getSorcerer_anger()
 {
     return sorcerer_anger_;
 }
 
-
+/*
+Pseudocode getMap
+1. Return map
+*/
 Map Game::getMap()
 {
     return map_;
 }
-
+/*
+Pseudocdoe printRandomRiddle
+1. declare variable
+2. prompt the user at the object variables index
+3. set the answer to the proper answer at the proper index
+*/
 void Game::printRandomRiddle()
 {
     int x = rand()%20;
@@ -150,7 +174,16 @@ void Game::printRandomRiddle()
     answer_ = answers_.at(x);
 
 }
-
+/*
+Pseudocode NPCEncounter
+1. Prompt user 
+2. Use condition statements to set each player location and player column to true
+3. printRandomRiddles
+4. prompt user to enter there answer
+5. setAnswer to the correct answer
+6. Re prompt user with the Inventory Menu options
+7. If answered incorrectly it's a monster fight
+*/
 void Game::NPCEncounter(Group &G, Map &map)
 {
     int choice;
@@ -168,7 +201,7 @@ void Game::NPCEncounter(Group &G, Map &map)
         cout << "What direction would you like to move in? (wasd)" << endl;
         cin >> choice1;
         move(choice1, map);
-        if(map.isNPCLocation(map.getPlayerRow(), map.getPlayerCol()) == true)
+        if(map.isNPCLocation(map.getPlayerRow(), map.getPlayerCol()) == true) // get location set to true
         {
             NPCEncounter(G, map);
         }
@@ -176,7 +209,7 @@ void Game::NPCEncounter(Group &G, Map &map)
         {
             G.groupDoor();
 
-            if(G.getKeys() <= 0)
+            if(G.getKeys() <= 0) // getKeys and check if it is less then or equal to 0
             {
                 doorPuzzle(G, map);
             }
@@ -254,7 +287,14 @@ void Game::NPCEncounter(Group &G, Map &map)
     }
 }
 
-
+/*
+Pseudocode move
+1. check if the correct characters are being checked
+2. User the groupmove
+3. Use map object to facilitate move
+4. Use map object to display map
+5. Invalid input
+*/
 void Game::move(char c, Map &m)
 {
     if(c == 'w' || c == 'a' || c == 's' || c == 'd')
@@ -270,16 +310,12 @@ void Game::move(char c, Map &m)
     }
 }
 
-
-// Monster Game::getRandomMonster()
-// {
-//     // int x = rand()%4;
-
-//     // monsterIndex_ = x;
-
-//     // return monsters_.at(x);
-// }
-
+/*
+Pseudocode investigate 
+1. Check the random variable. If so user Group object with groupInvest
+2. prompt user to found hidden treature
+3. Use merchant object to add different inventory
+*/
 void Game::investigate(Group &G)
 {
     
@@ -334,7 +370,15 @@ void Game::investigate(Group &G)
         merchant_.misfortune();
     }
 }
-
+/*
+Pseudocode gatMonsterName
+1. two varibles, name and x
+2. checks how many rooms are cleared with conditionals
+3. each conditional will pick a random monster from the vector with the level respective to how many rooms are cleared
+4. sets the name variable to the selected monsters name
+5. removes that monster from the vector so there are no repeat monsters
+6. returns the name, it will be used in the monster fight function
+*/
 string Game::getMonsterName()
 {
     int x = 0;
@@ -376,6 +420,16 @@ string Game::getMonsterName()
     }
     return "bossTime";
 }
+/*
+Pseudocode for RoomFight
+1.  If priate variable equals 4
+2. add private variable
+3. Show monster name
+4. Subtract private variable by 1
+5. If private variable doesn't equal 4
+6. add to to private variable
+7. show monster name
+*/
 void Game::roomFight()
 {
     if(doorsCleared_ == 4)
@@ -391,8 +445,18 @@ void Game::roomFight()
         doorsCleared_ = doorsCleared_ - 2;
     }
 }
-
-
+/*
+Pseudocdoe monsterFight
+1. set string to monster name
+2. prompt user the monster ahead
+3. check if NumWeapons is greater then 0. then return
+4. Prompt user if the want to fight or surrender
+5. Check for invalid input
+6. Calculate variable d
+7 Declare variables
+8. Calculate if the win the battle
+9. If the surrender take the amount they are suppose to
+*/
 void Game::monsterFight(Group &G, Map &map)
 {
     int choice;
@@ -549,6 +613,13 @@ void Game::monsterFight(Group &G, Map &map)
     }
 
 }
+/*
+Psuedocode CookandEat
+1. Prompt User
+2. Use probability to check if pot break
+3. decrement the pot if broken
+4. Increase the amount of fullness 
+*/
 void Game::CookandEat(Group &G)
 {
         // Needs to add the cookware increase in fullness if completed successfully
@@ -662,10 +733,10 @@ void Game::CookandEat(Group &G)
             return;
         }
 }
-
-
-
-
+/*
+Pseudocode for printActionMenu
+1. Prompt user
+*/
 void Game::printActionMenu()
 {
     int choice;
@@ -678,10 +749,17 @@ void Game::printActionMenu()
         cout << "4. Cook and Eat" << endl;
         cout << "5. Give up" << endl;
 }
+/*
+Pseudocode for doorPuzzle
+1. variables for each throw in the game
+2. conditional makes sure that player has no keys
+3. conditionals check doors throw (random) and players throw (cin)
+4. do while loop assures that after 3 ties the player loses
+5. if the player wins a monster fight insues and a private variable updates letting telling other fucntions that the player is in a room for the sake of roomscleared incrementation
+6. if the player loses they don't get to go into the room, and a monster fight ensues 
+*/
+void Game::doorPuzzle(Group &G, Map &map)
 
-void Game::doorPuzzle(Group &G, Map &map
-
-)
 {
     int boulder = 0;
     int parchment = 1;
@@ -758,7 +836,7 @@ void Game::doorPuzzle(Group &G, Map &map
         }
     }
 }
-
+// returns doors cleared
 int Game::getDoorsCleared()
 {
     return doorsCleared_;
