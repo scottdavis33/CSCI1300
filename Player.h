@@ -32,6 +32,7 @@ public:
     
     // Getters
     int getFullness();
+    void addFullness();
     string getName();
     bool getLife();
     
