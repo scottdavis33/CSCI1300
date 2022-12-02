@@ -21,7 +21,7 @@ class Group
     public:
         Group();
         void groupmove();
-        void life(Map);
+        void life(Map&);
          //getters
          string getName(int index);
          int getFull(int index);
@@ -40,6 +40,7 @@ class Group
          void groupInvest();
         void killPlayerAt(int);
         void groupDoor();
+        void groupEat();
          
         
          
