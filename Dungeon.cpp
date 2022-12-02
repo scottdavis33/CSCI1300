@@ -8,17 +8,16 @@
 #include "Merchant.h"
 #include "Player.h"
 #include "game.h"
-/*
-Pseudocode Dungeon
-1. Declare variables and objects
-2. Prompt user for Inventory Menu
-3. Go through all functions. Pseudocode will be ontop of functions
-*/
+
+using namespace std;
+
+
 int main()
 {
     Game Eat;
     Map Status;
     Map  map = Eat.getMap();
+    int randMisfortune;
     char Inven;
     int options = 0;
     Group G;
@@ -93,10 +92,24 @@ int main()
                 cout << "What direction would you like to move in? (wasd)" << endl;
                 cin >> choice1;
                 Eat.move(choice1, map);
-                if(map.isNPCLocation(map.getPlayerRow(), map.getPlayerCol()) == true)
+            if(map.isNPCLocation(map.getPlayerRow(), map.getPlayerCol()) == true)
+            {
+                Eat.NPCEncounter(G, map);
+            }
+            if(map.isRoomLocation(map.getPlayerRow(), map.getPlayerCol()) == true)
+            {
+                G.groupDoor();
+
+                if(G.getKeys() <= 0)
                 {
-                    Eat.NPCEncounter(G, map);
+                    Eat.doorPuzzle(G, map);
                 }
+                else
+                {
+                    cout << "You enter the room, it smells funny..." << endl;
+                    Eat.monsterFight(G, map);
+                }
+            }
 
                 break;
             }
@@ -110,33 +123,29 @@ int main()
                 {
                     if(rand()%5 == 2)
                     {
-                        Eat.monsterFight(G);
+                        Eat.monsterFight(G, map);
                         break;
                     }
                     Eat.investigate(G);
                     Eat.merchant_.displayMenu();
-                    
                 }
+                G.life(map);
                 break;
             }
             case 3:
             {
-                Eat.monsterFight(G);
+                Eat.monsterFight(G, map);
                 Eat.merchant_.displayMenu();
-                
+                G.life(map);
+
                 break;
             }
             case 4:
             {
-                Eat.CookandEat();
+                Eat.CookandEat(G);
                 Eat.merchant_.displayMenu();
+                G.life(map);
 
-                // cout << "Players weapons: " << endl;
-                // cout << "Player 1: " << G.getPlayerAt(0).getWeapon() << endl;
-                // cout << "Player 2: " << G.getPlayerAt(1).getWeapon() << endl;
-                // cout << "Player 3: " << G.getPlayerAt(2).getWeapon() << endl;
-                // cout << "Player 4: " << G.getPlayerAt(3).getWeapon() << endl;
-                // cout << "Player 5: " << G.getPlayerAt(4).getWeapon() << endl;
 
                 break;
             }
@@ -144,8 +153,13 @@ int main()
             cout << "You have choosen to end the game." << endl;
             break;
         }
+        if(Eat.getDoorsCleared() == 5)
+        {
+            cout << "You have cleared all 5 rooms. You win!" << endl;
+        }
+
     } while (ActionMenu != 5);
     
-    // Eat.CookandEat();
-    // Eat.merchant_.displayMenu(); // Updating correct numbers
-}
+};
+
+
