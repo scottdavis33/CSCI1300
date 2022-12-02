@@ -18,12 +18,7 @@ Group::Group()
     armor_ = 0;
     bonus_ = 0;
 }
-/*
-Pseudocode setFullandName
-1. Prompt user
-2. Store each player for fullness,life, and store into a string
-3. input the names
-*/
+
 void Group::setFullandName()
 {
     string name,name1,name2,name3,name4;
@@ -78,11 +73,8 @@ int Group::getFull(int index)
 /*
 Pseudocode for status map
 1. This will be displayed every single time they leave a room 
-2. When we want to add keys to the inventory
-3. Use getName and getFullness with a players array.
-4. This is the status map that will be shown after every monster encounted.
 */
-void Group::life(Map map)
+void Group::life(Map &map)
 {
     cout << "+-------------+" << endl;
     cout << "|   STATUS    |" << endl;
@@ -200,4 +192,13 @@ void Group::killPlayerAt(int index)
     players[index].setFullness(0);
     players[index].setLife(false);
     players[index].setArmor(false);
+}
+
+void Group::groupEat()
+{
+    players[0].addFullness();
+    players[1].addFullness();
+    players[2].addFullness();
+    players[3].addFullness();
+    players[4].addFullness();
 }
