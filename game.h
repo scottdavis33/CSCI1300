@@ -85,7 +85,7 @@ public:
 
     void printRandomRiddle();
 
-    void CookandEat();
+    void CookandEat(Group&);
 
     Monster getRandomMonster();
 
@@ -94,6 +94,8 @@ public:
     void doorPuzzle(Group&, Map&);
 
     void roomFight();
+
+    int getDoorsCleared();
 
     Merchant merchant_;
 
