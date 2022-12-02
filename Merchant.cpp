@@ -1,6 +1,6 @@
 // CSCI 1300 Fall 2022
-// Author: Jared Preyer
-// Recitation: 105 - Reagan Rychecky
+// Author: Jared Preyer && Scott Davis 
+// Recitation: 105 - Reagan Rychecky && Recitation 308 Baljot Kaur
 // Project 3 - Class 1
 #include <iostream>
 #include <cstdlib>
@@ -741,89 +741,96 @@ void Merchant::setWeapons(Group &G)
         cout << "5. To sell Gem - encrusted goblet (G) - 50 gold pieces each" << endl;
         cin >> select;
 
-        switch (select)
+        if(silver_ >= 1 || ruby_ >= 1 || emerald_ >= 1 || diamond_ >= 1 || gem_ >= 1)
         {
-        case 1:
-        {
-            cout << "Congrats on finding a Silver ring. How many would you like to sell? " << endl;
-            cin >> silver;
-            if (silver <= 0)
+        `   switch (select)
             {
-                return;
-            }
-            else if (silver > 1)
-            {
-                gold_ += silver * 10;
-                silver_ = silver_ - silver;
-                cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
+                case 1:
+                {
+                    cout << "Congrats on finding a Silver ring. How many would you like to sell? " << endl;
+                    cin >> silver;
+                    if (silver <= 0)
+                    {
+                        return;
+                    }
+                    else if (silver > 1)
+                    {
+                        gold_ += silver * 10;
+                        silver_ = silver_ - silver;
+                        cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
+                        break;
+                        // Update Merchant inventory for showing that merchant
+                    }
+                }
+                case 2:
+                {
+                    cout << "Congrats on finding Ruby. How many would you like to sell? " << endl;
+                    cin >> ruby;
+                    if (ruby <= 0)
+                    {
+                        return;
+                    }
+                    else if (ruby > 1)
+                    {
+                        gold_ += ruby * 20;
+                        ruby_ = ruby_ - ruby;
+                        cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
+                        break;
+                    }
+                }
+                case 3:
+                {
+                    cout << "Congrats on finding a Emerald. How many would you like to sell? " << endl;
+                    cin >> emerald;
+                    if (emerald <= 0)
+                    {
+                        return;
+                    }
+                    else if (emerald > 1)
+                    {
+                        gold_ += emerald * 30;
+                        emerald_ = emerald_ - emerald;
+                        cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
+                    }
+                }
+                case 4:
+                {
+                    cout << "Congrats on finding a Diamond. How many would you like to sell? " << endl;
+                    cin >> diamond;
+                    if (diamond <= 0)
+                    {
+                        return;
+                    }
+                    else if (diamond > 1)
+                    {
+                        gold_ += diamond * 40;
+                        diamond_ = diamond_ - diamond;
+                        cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
+                    }
+                }
+                case 5:
+                {
+                    cout << "Congrats on finding a Gem. How many would you like to sell? " << endl;
+                    cin >> Gem;
+                    if (Gem <= 0)
+                    {
+                        return;
+                    }
+                    else if (Gem > 1)
+                    {
+                        gold_ += Gem * 50;
+                        gem_ = gem_ - Gem;
+                        cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
+                    }
+                }
+                default:
+                cout << "Goodbye." << endl;
                 break;
-                // Update Merchant inventory for showing that merchant
             }
         }
-        case 2:
+        else
         {
-            cout << "Congrats on finding Ruby. How many would you like to sell? " << endl;
-            cin >> ruby;
-            if (ruby <= 0)
-            {
-                return;
-            }
-            else if (ruby > 1)
-            {
-                gold_ += ruby * 20;
-                ruby_ = ruby_ - ruby;
-                cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
-                break;
-            }
-        }
-        case 3:
-        {
-            cout << "Congrats on finding a Emerald. How many would you like to sell? " << endl;
-            cin >> emerald;
-            if (emerald <= 0)
-            {
-                return;
-            }
-            else if (emerald > 1)
-            {
-                gold_ += emerald * 30;
-                emerald_ = emerald_ - emerald;
-                cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
-            }
-        }
-        case 4:
-        {
-            cout << "Congrats on finding a Diamond. How many would you like to sell? " << endl;
-            cin >> diamond;
-            if (diamond <= 0)
-            {
-                return;
-            }
-            else if (diamond > 1)
-            {
-                gold_ += diamond * 40;
-                diamond_ = diamond_ - diamond;
-                cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
-            }
-        }
-        case 5:
-        {
-            cout << "Congrats on finding a Gem. How many would you like to sell? " << endl;
-            cin >> Gem;
-            if (Gem <= 0)
-            {
-                return;
-            }
-            else if (Gem > 1)
-            {
-                gold_ += Gem * 50;
-                gem_ = gem_ - Gem;
-                cout << "Thank you for your transaction. Your deposit has been made. :)" << endl;
-            }
-        }
-        default:
-            cout << "Goodbye." << endl;
-            break;
+            cout << "Insufficient funds. " << endl;
         }
     }
     /*
