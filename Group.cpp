@@ -12,13 +12,15 @@
 #include <cstdlib>
 
 using namespace std;
-
+//sets armor to 0
+//sets bonus points to 0
 Group::Group()
 {
     armor_ = 0;
     bonus_ = 0;
 }
-
+//prompts player to input his name and his players names
+//updates player name, group names and fullnesses accordingly
 void Group::setFullandName()
 {
     string name,name1,name2,name3,name4;
@@ -65,7 +67,7 @@ string Group::getName(int index)
 {
     return players[index].getName();
 }
-
+//returns fullness of a player at a specific index
 int Group::getFull(int index)
 {
     return players[index].getFullness();
@@ -92,7 +94,8 @@ void Group::life(Map &map)
     cout << "| " << players[4].getName() << " | " << "Fullness: " << players[4].getFullness() << endl;
     cout << "+-------------+" << endl;
 }
-
+// Takes a player index and a weapon input and updates the players weapon accordingly
+// Adds bonus points if the weapon is the 4th or 5th option from merchant
 void Group::setPlayerWeaponAt(int index, int weapon)
 {
     if(weapon == 3)
@@ -116,34 +119,37 @@ void Group::setPlayerWeaponAt(int index, int weapon)
 
     players[index].setWeapon(weapon);
 }
-
+// returns player object at a specified index
 Player Group::getPlayerAt(int index)
 {
     return players[index];
 }
-
+//returns bonus points
 int Group::getBonus()
 {
     return bonus_;
 }
+//returns number of weapons
 int Group:: getNumWeapons()
 {
     return numWeapons_;
 }
+//incremenets armor
 void Group::setArmor2(int x)
 {
     armor_ = armor_ + x;
 }
+//returns armor
 int Group::getArmor2()
 {
     return armor_;
 }
-
+//sets a specif players armor
 void Group::setArmorAt(int x)
 {
     players[x].setArmor(true);
 }
-
+//returns the number of players that are not named "Dead"
 int Group::numPlayers()
 {
     int counter = 0;
@@ -156,17 +162,18 @@ int Group::numPlayers()
     }
     return counter;
 }
-
+// increments keys
 void Group::addKey()
 {
     keys_++;
 }
-
+// returns number of keys
 int Group::getKeys()
 {
     return keys_;
 }
-
+// uses invest funciton for each player 
+// invest function deincrements fullness based on probability when using the investigate action
 void Group::groupInvest()
 {
     players[0].invest();
@@ -175,7 +182,8 @@ void Group::groupInvest()
     players[3].invest();
     players[4].invest();
 }
-
+// uses door function for each player
+// door function deincrements fullness based on probability when entering a room 
 void Group::groupDoor()
 {
     players[0].door();
@@ -184,7 +192,8 @@ void Group::groupDoor()
     players[3].door();
     players[4].door();
 }
-
+// kills a player at specified index
+// sets their weapon to a random number so it wont count towards the regular weapons class (makes it extremely unlikely)
 void Group::killPlayerAt(int index)
 {
     players[index].setName("Dead");
@@ -193,7 +202,8 @@ void Group::killPlayerAt(int index)
     players[index].setLife(false);
     players[index].setArmor(false);
 }
-
+// adds a fullness point toe each player
+// used in cook and eat action menu option 
 void Group::groupEat()
 {
     players[0].addFullness();
