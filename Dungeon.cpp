@@ -8,7 +8,12 @@
 #include "Merchant.h"
 #include "Player.h"
 #include "game.h"
-
+/*
+Pseudocode Dungeon
+1. Declare variables and objects
+2. Prompt user for Inventory Menu
+3. Go through all functions. Pseudocode will be ontop of functions
+*/
 int main()
 {
     Game Eat;
