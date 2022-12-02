@@ -1,6 +1,6 @@
 // CSCI 1300 Fall 2022
-// Author: Scott Davis && Jared Preyer
-// Recitation: 308 – Baljot Kaur && Recitation 105 Raegan Rychecky
+// Author: Scott Davis
+// Recitation: 308 – Baljot Kaur
 // Project 3 - Class 4
 #include <iostream>
 #include "Player.h"
@@ -54,10 +54,12 @@ void Player::setLife(bool life)
 {
     life_ = life;
 }
+// sets player fullness
 void Player::setFullness(int fullness)
 {
     fullness_ = fullness;
 }
+// sets player name
 void Player::setName(string name)
 {
     name_ = name;
@@ -74,28 +76,28 @@ void Player::movement()
         fullness_ = fullness_ - 1;
     }
 }
-
+// sets player weapon
 void Player::setWeapon(int weapon)
 {
     weapon_ = weapon;
 }
-
+//returns player weapon
 int Player::getWeapon()
 {
     return weapon_;
 }
-
+// sets player armor
 void Player::setArmor(bool x)
 {
     armor_ = x;
 }
-
+// returns true of false if the player has armor
 bool Player::checkArmor()
 {
     return armor_;
 }
 
-
+// 50/50 chance to deincrement players fullness
 void Player::invest()
 {
     if(rand()%2 == 1)
@@ -103,7 +105,7 @@ void Player::invest()
         fullness_ = fullness_ - 1;
     }
 }
-
+// 20% chance to deincrement players fullness
 void Player::door()
 {
     if(rand()%5 == 2)
@@ -111,7 +113,7 @@ void Player::door()
         fullness_ = fullness_ - 1;
     }
 }
-
+// increments players fullness
 void Player:: addFullness()
 {
     fullness_++;
